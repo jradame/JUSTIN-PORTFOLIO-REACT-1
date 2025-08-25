@@ -1,7 +1,7 @@
 import React from 'react';
+import Skeleton from 'react-loading-skeleton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAdjust } from '@fortawesome/free-solid-svg-icons';
-import Skeleton from 'react-loading-skeleton';
 
 const Navbar = ({ loading, isDarkMode, toggleTheme, toggleModal }) => {
   const scrollToSection = (sectionId) => {
@@ -18,7 +18,12 @@ const Navbar = ({ loading, isDarkMode, toggleTheme, toggleModal }) => {
           {loading ? (
             <Skeleton width="150px" height="24px" />
           ) : (
-            <span className="nav__logo-text">JUSTIN ADAME</span>
+            <span 
+              className="nav__logo-text"
+              onClick={() => toggleModal('about')}
+            >
+              JUSTIN ADAME
+            </span>
           )}
         </div>
         
@@ -32,7 +37,10 @@ const Navbar = ({ loading, isDarkMode, toggleTheme, toggleModal }) => {
         ) : (
           <ul className="nav__link--list">
             <li className="nav__link">
-              <button className="nav__link--anchor" onClick={toggleModal}>
+              <button 
+                className="nav__link--anchor" 
+                onClick={() => toggleModal('about')}
+              >
                 About
               </button>
             </li>
@@ -45,7 +53,10 @@ const Navbar = ({ loading, isDarkMode, toggleTheme, toggleModal }) => {
               </button>
             </li>
             <li className="nav__link">
-              <button className="nav__link--anchor" onClick={toggleModal}>
+              <button 
+                className="nav__link--anchor" 
+                onClick={() => toggleModal('contact')}
+              >
                 Contact
               </button>
             </li>
@@ -66,4 +77,3 @@ const Navbar = ({ loading, isDarkMode, toggleTheme, toggleModal }) => {
 };
 
 export default Navbar;
-

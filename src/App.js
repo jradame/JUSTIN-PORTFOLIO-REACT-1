@@ -6,6 +6,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLinkedinIn, faGithub } from '@fortawesome/free-brands-svg-icons';
 import { faFilePdf } from '@fortawesome/free-solid-svg-icons';
 import Navbar from './components/Navbar';
+import Modal from './components/Modal';
+import Projects from './components/Projects';
 import './App.css';
 
 // Hero Component (inline)
@@ -92,12 +94,13 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalType, setModalType] = useState('about');
 
-  // Simulate loading
+  // Simulate loading for 1.5 seconds
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 3000);
+    }, 1500);
 
     return () => clearTimeout(timer);
   }, []);
@@ -108,9 +111,14 @@ function App() {
     document.body.classList.toggle('dark-theme');
   };
 
-  // Modal toggle
-  const toggleModal = () => {
+  // Modal toggle with type
+  const toggleModal = (type = 'about') => {
+    setModalType(type);
     setIsModalOpen(prev => !prev);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
   };
 
   return (
@@ -126,13 +134,17 @@ function App() {
           toggleModal={toggleModal}
         />
         <Hero data={portfolioData} loading={loading} />
+        <Projects loading={loading} />
+        <Modal 
+          isOpen={isModalOpen} 
+          onClose={closeModal} 
+          loading={loading}
+          modalType={modalType}
+        />
       </div>
     </SkeletonTheme>
   );
 }
 
 export default App;
-
-
-
 
