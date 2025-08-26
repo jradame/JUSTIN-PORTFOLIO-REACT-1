@@ -1,9 +1,24 @@
 import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAdjust } from '@fortawesome/free-solid-svg-icons';
+import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
 
 const Navbar = ({ loading, isDarkMode, toggleTheme, toggleModal }) => {
+  // Scroll to top function
+  const scrollToTop = () => {
+    window.scrollTo({ 
+      top: 0, 
+      left: 0, 
+      behavior: 'smooth' 
+    });
+  };
+
+  // Handle brand click
+  const handleBrandClick = (e) => {
+    e.preventDefault();
+    scrollToTop();
+  };
+
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -12,18 +27,19 @@ const Navbar = ({ loading, isDarkMode, toggleTheme, toggleModal }) => {
   };
 
   return (
-    <nav className="navbar">
+    <nav className={`navbar ${isDarkMode ? 'navbar--dark' : ''}`}>
       <div className="nav-container">
         <div className="nav__logo">
           {loading ? (
             <Skeleton width="150px" height="24px" />
           ) : (
-            <span 
-              className="nav__logo-text"
-              onClick={() => toggleModal('about')}
+            <button
+              className="nav__logo-text nav__logo-button"
+              onClick={handleBrandClick}
+              type="button"
             >
               JUSTIN ADAME
-            </span>
+            </button>
           )}
         </div>
         
@@ -32,7 +48,7 @@ const Navbar = ({ loading, isDarkMode, toggleTheme, toggleModal }) => {
             <Skeleton width="60px" height="20px" />
             <Skeleton width="70px" height="20px" />
             <Skeleton width="70px" height="20px" />
-            <Skeleton circle width="30px" height="30px" />
+            <Skeleton circle width="40px" height="40px" />
           </div>
         ) : (
           <ul className="nav__link--list">
@@ -60,13 +76,17 @@ const Navbar = ({ loading, isDarkMode, toggleTheme, toggleModal }) => {
                 Contact
               </button>
             </li>
-            <li className="nav__link click">
+            <li className="nav__link">
               <button 
-                className="nav__link--anchor theme-toggle"
+                className={`nav__link--anchor theme-toggle ${isDarkMode ? 'theme-toggle--dark' : ''}`}
                 onClick={toggleTheme}
-                aria-label="Toggle dark mode"
+                aria-label={`Switch to ${isDarkMode ? 'light' : 'dark'} mode`}
+                title={`Switch to ${isDarkMode ? 'light' : 'dark'} mode`}
               >
-                <FontAwesomeIcon icon={faAdjust} />
+                <FontAwesomeIcon 
+                  icon={isDarkMode ? faSun : faMoon} 
+                  className="theme-toggle__icon"
+                />
               </button>
             </li>
           </ul>
@@ -77,3 +97,6 @@ const Navbar = ({ loading, isDarkMode, toggleTheme, toggleModal }) => {
 };
 
 export default Navbar;
+
+
+
