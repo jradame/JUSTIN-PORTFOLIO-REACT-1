@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSun, faMoon, faExternalLinkAlt, faGem, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faSun, faMoon, faExternalLinkAlt, faGem, faUser, faEnvelope } from '@fortawesome/free-solid-svg-icons';
+
 import { faLinkedin, faGithub as faGithubBrand, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
@@ -102,7 +103,7 @@ function App() {
     if (menuOpen) setMenuOpen(false); // Close mobile menu
   };
 
-  // **YOUR NFT PROJECT + PLACEHOLDER PROJECTS**
+  // **YOUR PROJECTS WITH REAL VERCEL URL**
   const projects = [
     {
       icon: faGem,
@@ -112,7 +113,7 @@ function App() {
       status: "COMPLETED",
       imageUrl: "/images/NFT-LANDING-PAGE.png", // Your actual screenshot
       githubUrl: "https://github.com/yourusername/nft-landing-page", // Replace with your actual repo
-      liveUrl: "https://your-nft-demo.netlify.app", // Replace with your actual deployed site
+      liveUrl: "https://justin-internship-rho.vercel.app", // 🎯 YOUR ACTUAL VERCEL URL
       technologies: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "UI/UX"]
     },
     {
@@ -123,7 +124,7 @@ function App() {
       status: "COMING SOON",
       imageUrl: "https://via.placeholder.com/370x270/3b82f6/ffffff?text=Dashboard+Coming+Soon",
       githubUrl: "https://github.com/yourusername/dashboard-project",
-      liveUrl: null,
+      liveUrl: null, // Set to null for coming soon projects
       technologies: ["React", "Chart.js", "CSS3"]
     },
     {
@@ -134,7 +135,7 @@ function App() {
       status: "COMING SOON",
       imageUrl: "https://via.placeholder.com/370x270/06b6d4/ffffff?text=E-commerce+Coming+Soon",
       githubUrl: "https://github.com/yourusername/ecommerce-project",
-      liveUrl: null,
+      liveUrl: null, // Set to null for coming soon projects
       technologies: ["React", "Node.js", "MongoDB"]
     }
   ];
@@ -309,7 +310,7 @@ function App() {
         </div>
       </section>
 
-      {/* PROJECTS SECTION - FULL IMAGE CONTAINER FIX */}
+      {/* PROJECTS SECTION - WITH YOUR LIVE VERCEL URL */}
       <section className="projects">
         <div className="projects__container">
           <h2 className="section__title">
@@ -356,6 +357,7 @@ function App() {
                     <h3 className="project-simple-title">{project.title}</h3>
                     <p className="project-simple-desc">{project.description}</p>
                     <div className="project-simple-links">
+                      {/* CONDITIONAL RENDERING: Only show Live Demo if URL exists */}
                       {project.liveUrl && (
                         <a
                           href={project.liveUrl}
@@ -458,13 +460,14 @@ function App() {
               <h4 className="footer__section-title">Get In Touch</h4>
               <div className="footer__contact">
                 <a 
-                  href="mailto:your.email@example.com" 
-                  className="footer__contact-item"
-                  aria-label="Send email"
-                >
-                  <FontAwesomeIcon icon={faUser} />
-                  your.email@example.com
-                </a>
+  href="mailto:your.email@example.com" 
+  className="footer__contact-item"
+  aria-label="Send email"
+>
+  <FontAwesomeIcon icon={faEnvelope} />
+  your.email@example.com
+</a>
+
                 <p className="footer__contact-text">
                   Let's connect and build something amazing together!
                 </p>
@@ -496,7 +499,4 @@ function App() {
 }
 
 export default App;
-
-
-
 

@@ -337,7 +337,7 @@ body {
 }
 
 /* ==========================================================================
-   PROJECTS SECTION - FULL IMAGE CONTAINER
+   PROJECTS SECTION - ENHANCED IMAGE & BUTTON SPACING
    ========================================================================== */
 
 .projects {
@@ -396,7 +396,7 @@ body {
   flex-wrap: wrap;
 }
 
-/* THREE CARDS IN ONE ROW - FULL IMAGE CONTAINER */
+/* ENHANCED PROJECT LAYOUT */
 .project-block {
   flex: 1;
   max-width: 370px;
@@ -409,35 +409,48 @@ body {
   background: none;
 }
 
-/* Container ensures aspect ratio and centers image */
+/* Enhanced image container with subtle depth */
 .project-image-container {
   width: 100%;
-  aspect-ratio: 3/4; /* Adjust to match most screenshots, e.g. 3:4 = 375x500px */
+  aspect-ratio: 3/4;
   display: flex;
   align-items: center;
   justify-content: center;
   background: none;
   position: relative;
-  margin-bottom: 1rem;
+  margin-bottom: 1.2rem; /* Slightly more space below image */
+  border-radius: 8px; /* Subtle rounded corners */
+  overflow: hidden; /* Ensure image respects border radius */
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05); /* Very subtle shadow for depth */
+  transition: all 0.3s ease;
+}
+
+.project-image-container:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Slightly more shadow on hover */
+  transform: translateY(-2px); /* Subtle lift effect */
+}
+
+.dark-theme .project-image-container {
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+}
+
+.dark-theme .project-image-container:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 .project-image-simple {
   max-width: 100%;
   max-height: 100%;
   display: block;
-  border-radius: 0;
+  border-radius: 8px; /* Match container */
   border: none;
   box-shadow: none;
   background: none !important;
   background-color: transparent !important;
-  object-fit: contain; /* Ensures ENTIRE image is always visible */
+  object-fit: contain;
   transition: transform 0.3s ease;
   padding: 0;
   outline: none;
-}
-
-.project-image-simple:hover {
-  transform: translateY(-2px);
 }
 
 .project-simple-info {
@@ -452,60 +465,63 @@ body {
 .project-simple-title {
   font-size: 1.2rem;
   font-weight: 700;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.6rem; /* Slightly more space */
   color: var(--text-primary);
   line-height: 1.3;
 }
 
 .project-simple-desc {
-  margin-bottom: 1rem;
+  margin-bottom: 1.2rem; /* More space before buttons */
   font-size: 0.9rem;
   color: var(--text-secondary);
   line-height: 1.4;
 }
 
+/* IMPROVED BUTTON SPACING & STYLING */
 .project-simple-links {
-  margin-bottom: 1rem;
+  margin-bottom: 1.2rem;
   display: flex;
-  gap: 0.5rem;
+  gap: 1rem; /* Increased gap between buttons */
   justify-content: center;
 }
 
 .project-simple-btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.3rem;
+  gap: 0.4rem;
   background: var(--primary);
   color: #fff;
   border: none;
-  border-radius: 5px;
-  padding: 0.5rem 1rem;
+  border-radius: 8px; /* More rounded buttons */
+  padding: 0.6rem 1.2rem; /* Slightly larger buttons */
   font-size: 0.85rem;
   font-weight: 600;
   text-decoration: none;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
   cursor: pointer;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.2); /* Subtle shadow */
 }
 
 .project-simple-btn:hover { 
   background: var(--accent); 
-  transform: translateY(-1px); 
-  box-shadow: 0 3px 10px rgba(6, 182, 212, 0.3);
+  transform: translateY(-2px); 
+  box-shadow: 0 4px 16px rgba(6, 182, 212, 0.3);
 }
 
 .project-simple-btn-github { 
-  background: #393e4c; 
+  background: #393e4c;
+  box-shadow: 0 2px 8px rgba(57, 62, 76, 0.2);
 }
 
 .project-simple-btn-github:hover { 
   background: #15181e; 
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 16px rgba(21, 24, 30, 0.3);
 }
 
 .project-simple-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.3rem;
+  gap: 0.4rem; /* Slightly more space between tags */
   justify-content: center;
 }
 
@@ -514,14 +530,24 @@ body {
   color: var(--primary);
   border-radius: 6px;
   font-size: 0.7rem;
-  padding: 0.2rem 0.5rem;
+  padding: 0.3rem 0.6rem; /* Slightly more padding */
   font-weight: 600;
   display: inline-block;
+  transition: all 0.2s ease;
+}
+
+.project-simple-tag:hover {
+  background: rgba(59, 130, 246, 0.15);
+  transform: translateY(-1px);
 }
 
 .dark-theme .project-simple-tag {
   background: rgba(34, 211, 238, 0.15);
   color: var(--accent);
+}
+
+.dark-theme .project-simple-tag:hover {
+  background: rgba(34, 211, 238, 0.2);
 }
 
 /* ==========================================================================
@@ -1200,7 +1226,7 @@ body {
   
   .project-simple-links {
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.7rem;
   }
   
   .project-simple-btn {
@@ -1331,6 +1357,7 @@ body {
 ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
 
 html { scroll-behavior: smooth; }
+
 
 
 
