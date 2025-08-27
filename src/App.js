@@ -1,3 +1,10 @@
+/*
+ * App.js - Main React component that ties everything together
+ * This is where all the magic happens - theme switching, modal management, 
+ * navigation handling, and all the main sections of my portfolio
+ * Took a while to get the state management right but it's solid now
+ */
+
 import React, { useEffect, useState, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSun, faMoon, faExternalLinkAlt, faGem, faUser, faEnvelope } from '@fortawesome/free-solid-svg-icons';
@@ -8,28 +15,40 @@ import './App.css';
 import Modal from './components/Modal';
 
 function App() {
-  // Theme state
+  /*
+   * THEME STATE MANAGEMENT
+   * Using localStorage to remember user's preference - nobody likes having to 
+   * switch themes every time they visit
+   */
   const [isDarkMode, setIsDarkMode] = useState(() => {
     const savedTheme = localStorage.getItem('theme');
     return savedTheme === 'dark';
   });
   const [isTransitioning, setIsTransitioning] = useState(false);
 
-  // Loading state
+  // Loading state - shows skeleton placeholders while everything loads
   const [loading, setLoading] = useState(true);
 
-  // Modal state
+  /*
+   * MODAL STATE MANAGEMENT
+   * Controls which modal is open (about/contact) and loading states
+   * The loading state gives that nice delay effect when opening modals
+   */
   const [modalOpen, setModalOpen] = useState(false);
   const [modalType, setModalType] = useState('about');
   const [modalLoading, setModalLoading] = useState(false);
 
-  // Mobile menu state
+  // Mobile menu state - hamburger menu toggle
   const [menuOpen, setMenuOpen] = useState(false);
 
-  // Refs
+  // Refs for any DOM manipulation needs
   const modalRef = useRef();
 
-  // Theme initialization
+  /*
+   * Theme initialization and setup
+   * Adds/removes theme classes from body and simulates loading time
+   * The 2 second loading gives a nice polish feel to the site
+   */
   useEffect(() => {
     if (isDarkMode) {
       document.body.classList.add('dark-theme');
@@ -44,9 +63,13 @@ function App() {
     return () => clearTimeout(timer);
   }, [isDarkMode]);
 
-  // Theme toggle function
+  /*
+   * Theme toggle with smooth transitions
+   * Prevents rapid clicking and adds transition class to disable animations
+   * during theme switch - prevents weird flickering effects
+   */
   const toggleTheme = () => {
-    if (isTransitioning) return;
+    if (isTransitioning) return; // Don't allow spam clicking
 
     setIsTransitioning(true);
     document.body.classList.add('theme-transitioning');
@@ -62,18 +85,23 @@ function App() {
       localStorage.setItem('theme', 'light');
     }
 
+    // Re-enable transitions after theme switch is complete
     setTimeout(() => {
       document.body.classList.remove('theme-transitioning');
       setIsTransitioning(false);
     }, 300);
   };
 
-  // Modal functions
+  /*
+   * Modal management functions
+   * openModal sets type, shows loading spinner, then reveals content
+   * Also closes mobile menu if it's open
+   */
   const openModal = (type) => {
     setModalType(type);
     setModalLoading(true);
     setModalOpen(true);
-    setMenuOpen(false);
+    setMenuOpen(false); // Close mobile menu when opening modal
 
     setTimeout(() => {
       setModalLoading(false);
@@ -85,19 +113,21 @@ function App() {
     setModalLoading(false);
   };
 
-  // Close mobile menu
+  // Mobile menu helpers
   const closeMenu = () => setMenuOpen(false);
-
-  // Toggle mobile menu
   const toggleMenu = () => setMenuOpen(!menuOpen);
 
-  // Scroll to projects section
+  // Smooth scroll to projects section - used by nav and footer
   const scrollToProjects = () => {
     document.querySelector('.projects').scrollIntoView({ behavior: 'smooth' });
-    if (menuOpen) setMenuOpen(false);
+    if (menuOpen) setMenuOpen(false); // Close mobile menu after navigation
   };
 
-  // Projects array with the correct LIVE URL
+  /*
+   * PROJECTS DATA
+   * My actual projects with the CORRECT live URLs (finally fixed that!)
+   * Ultraverse is live, others are placeholders for future projects
+   */
   const projects = [
     {
       icon: faGem,
@@ -107,7 +137,7 @@ function App() {
       status: "COMPLETED",
       imageUrl: "/images/NFT-LANDING-PAGE.png",
       githubUrl: "https://github.com/jradame/ultraverse-nft-project",
-      liveUrl: "https://ultraverse-nft-project.vercel.app/", // ✅ Correct live URL
+      liveUrl: "https://ultraverse-nft-project.vercel.app/", // ✅ The URL that actually works now
       technologies: ["React", "CSS3", "JavaScript", "React Router", "Vercel"]
     },
     {
@@ -117,8 +147,8 @@ function App() {
       description: "Interactive data visualization and analytics dashboard with real-time updates, charts, and responsive design for business intelligence.",
       status: "COMING SOON",
       imageUrl: "https://via.placeholder.com/370x270/3b82f6/ffffff?text=Dashboard+Coming+Soon",
-      githubUrl: "https://github.com/yourusername/dashboard-project",
-      liveUrl: null,
+      githubUrl: "https://github.com/yourusername/dashboard-project", // TODO: Update with real repo
+      liveUrl: null, // No live demo yet
       technologies: ["React", "Chart.js", "CSS3"]
     },
     {
@@ -128,15 +158,15 @@ function App() {
       description: "Complete e-commerce solution with user authentication, payment processing, and admin dashboard built with modern technologies.",
       status: "COMING SOON",
       imageUrl: "https://via.placeholder.com/370x270/06b6d4/ffffff?text=E-commerce+Coming+Soon",
-      githubUrl: "https://github.com/yourusername/ecommerce-project",
-      liveUrl: null,
+      githubUrl: "https://github.com/yourusername/ecommerce-project", // TODO: Update with real repo
+      liveUrl: null, // No live demo yet
       technologies: ["React", "Node.js", "MongoDB"]
     }
   ];
 
   return (
     <div className="App">
-      {/* NAVBAR */}
+      {/* NAVBAR - Fixed header with hamburger menu for mobile */}
       <nav className="navbar">
         <div className="nav-container">
           <button 
@@ -146,6 +176,8 @@ function App() {
           >
             Justin Adame
           </button>
+          
+          {/* Hamburger menu - only visible on mobile */}
           <button 
             className={`hamburger ${menuOpen ? 'active' : ''}`}
             onClick={toggleMenu}
@@ -156,8 +188,11 @@ function App() {
             <span className="bar"></span>
             <span className="bar"></span>
           </button>
+          
+          {/* Navigation links with loading skeletons */}
           <ul className={`nav__link--list ${menuOpen ? 'open' : ''}`}>
             {loading ? (
+              // Show skeleton placeholders while loading
               <div className="nav__links-skeleton">
                 <Skeleton width="60px" height="20px" />
                 <Skeleton width="70px" height="20px" />
@@ -191,10 +226,11 @@ function App() {
                   </button>
                 </li>
                 <li>
+                  {/* Theme toggle button with sun/moon icons */}
                   <button
                     className={`theme-toggle ${isDarkMode ? 'theme-toggle--dark' : ''}`}
                     onClick={toggleTheme}
-                    disabled={isTransitioning}
+                    disabled={isTransitioning} // Prevent spam clicking
                     aria-label={`Switch to ${isDarkMode ? 'light' : 'dark'} mode`}
                   >
                     <FontAwesomeIcon 
@@ -207,6 +243,8 @@ function App() {
             )}
           </ul>
         </div>
+        
+        {/* Mobile menu overlay - closes menu when clicking outside */}
         {menuOpen && (
           <div 
             className="menu-overlay" 
@@ -216,7 +254,7 @@ function App() {
         )}
       </nav>
 
-      {/* HERO SECTION */}
+      {/* HERO SECTION - Main intro with gradient background */}
       <section className="hero">
         <div className="hero-container">
           <div className="hero-content">
@@ -233,6 +271,7 @@ function App() {
             </div>
             <div className="hero-text">
               {loading ? (
+                // Loading skeletons that match the real content layout
                 <>
                   <Skeleton height="60px" width="80%" />
                   <Skeleton height="30px" width="90%" />
@@ -261,6 +300,8 @@ function App() {
                   </div>
                 </>
               )}
+              
+              {/* Social links - only show after loading */}
               {!loading && (
                 <div className="social-links">
                   <a
@@ -297,7 +338,7 @@ function App() {
         </div>
       </section>
 
-      {/* PROJECTS SECTION */}
+      {/* PROJECTS SECTION - My work showcase */}
       <section className="projects">
         <div className="projects__container">
           <h2 className="section__title">
@@ -305,6 +346,7 @@ function App() {
           </h2>
           <div className="projects__cards">
             {loading ? (
+              // Loading state with skeleton placeholders
               [...Array(3)].map((_, index) => (
                 <div key={index} className="project-block">
                   <div className="project-image-container">
@@ -325,6 +367,7 @@ function App() {
                 </div>
               ))
             ) : (
+              // Actual project cards
               projects.map((project, index) => (
                 <div key={index} className="project-block">
                   <div className="project-image-container">
@@ -333,6 +376,7 @@ function App() {
                       alt={`${project.title} screenshot`}
                       className="project-image-simple"
                       onError={e => {
+                        // Fallback to placeholder if image fails to load
                         e.target.src = `https://via.placeholder.com/370x270/3b82f6/ffffff?text=${encodeURIComponent(project.title)}`;
                       }}
                     />
@@ -341,6 +385,7 @@ function App() {
                     <h3 className="project-simple-title">{project.title}</h3>
                     <p className="project-simple-desc">{project.description}</p>
                     <div className="project-simple-links">
+                      {/* Only show Live Demo button if there's actually a live URL */}
                       {project.liveUrl && (
                         <a
                           href={project.liveUrl}
@@ -375,10 +420,11 @@ function App() {
         </div>
       </section>
 
-      {/* FOOTER */}
+      {/* FOOTER - Three column layout with links and contact info */}
       <footer className="footer">
         <div className="footer__container">
           <div className="footer__content">
+            {/* Brand section */}
             <div className="footer__section--brand">
               <h3 className="footer__brand">Justin Adame</h3>
               <p className="footer__description">
@@ -414,6 +460,8 @@ function App() {
                 </a>
               </div>
             </div>
+            
+            {/* Quick links section */}
             <div className="footer__section">
               <h4 className="footer__section-title">Quick Links</h4>
               <ul className="footer__links">
@@ -434,11 +482,13 @@ function App() {
                 </li>
               </ul>
             </div>
+            
+            {/* Contact section */}
             <div className="footer__section">
               <h4 className="footer__section-title">Get In Touch</h4>
               <div className="footer__contact">
                 <a
-                  href="mailto:your.email@example.com"
+                  href="mailto:your.email@example.com" // TODO: Update with real email
                   className="footer__contact-item"
                   aria-label="Send email"
                 >
@@ -451,6 +501,8 @@ function App() {
               </div>
             </div>
           </div>
+          
+          {/* Copyright section */}
           <div className="footer__bottom">
             <div className="footer__copyright">
               <p>
@@ -460,6 +512,8 @@ function App() {
           </div>
         </div>
       </footer>
+      
+      {/* Modal component - handles both about and contact modals */}
       <Modal
         isOpen={modalOpen}
         onClose={closeModal}
@@ -472,6 +526,5 @@ function App() {
 }
 
 export default App;
-
 
 
