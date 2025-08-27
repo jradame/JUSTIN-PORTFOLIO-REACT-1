@@ -1,54 +1,47 @@
 /*
- * App.js - Main React component that ties everything together
- * This is where all the magic happens - theme switching, modal management, 
- * navigation handling, and all the main sections of my portfolio
- * Took a while to get the state management right but it's solid now
+ * App.js - Main React component tying everything together
+ * Added missing import for faCalendarAlt used in project placeholders
  */
 
 import React, { useEffect, useState, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSun, faMoon, faExternalLinkAlt, faGem, faUser, faEnvelope } from '@fortawesome/free-solid-svg-icons';
-import { faLinkedin, faGithub as faGithubBrand, faTwitter } from '@fortawesome/free-brands-svg-icons';
+import {
+  faSun,
+  faMoon,
+  faExternalLinkAlt,
+  faGem,
+  faCalendarAlt
+} from '@fortawesome/free-solid-svg-icons';
+import { faLinkedin as faLinkedinBrand, faGithub as faGithubBrand, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import './App.css';
 import Modal from './components/Modal';
+import Footer from './components/Footer';
 
 function App() {
-  /*
-   * THEME STATE MANAGEMENT
-   * Using localStorage to remember user's preference - nobody likes having to 
-   * switch themes every time they visit
-   */
+  // Theme state
   const [isDarkMode, setIsDarkMode] = useState(() => {
     const savedTheme = localStorage.getItem('theme');
     return savedTheme === 'dark';
   });
   const [isTransitioning, setIsTransitioning] = useState(false);
 
-  // Loading state - shows skeleton placeholders while everything loads
+  // Loading state
   const [loading, setLoading] = useState(true);
 
-  /*
-   * MODAL STATE MANAGEMENT
-   * Controls which modal is open (about/contact) and loading states
-   * The loading state gives that nice delay effect when opening modals
-   */
+  // Modal state
   const [modalOpen, setModalOpen] = useState(false);
   const [modalType, setModalType] = useState('about');
   const [modalLoading, setModalLoading] = useState(false);
 
-  // Mobile menu state - hamburger menu toggle
+  // Mobile menu state
   const [menuOpen, setMenuOpen] = useState(false);
 
-  // Refs for any DOM manipulation needs
+  // Refs
   const modalRef = useRef();
 
-  /*
-   * Theme initialization and setup
-   * Adds/removes theme classes from body and simulates loading time
-   * The 2 second loading gives a nice polish feel to the site
-   */
+  // Theme initialization
   useEffect(() => {
     if (isDarkMode) {
       document.body.classList.add('dark-theme');
@@ -63,13 +56,9 @@ function App() {
     return () => clearTimeout(timer);
   }, [isDarkMode]);
 
-  /*
-   * Theme toggle with smooth transitions
-   * Prevents rapid clicking and adds transition class to disable animations
-   * during theme switch - prevents weird flickering effects
-   */
+  // Theme toggle function
   const toggleTheme = () => {
-    if (isTransitioning) return; // Don't allow spam clicking
+    if (isTransitioning) return;
 
     setIsTransitioning(true);
     document.body.classList.add('theme-transitioning');
@@ -85,23 +74,18 @@ function App() {
       localStorage.setItem('theme', 'light');
     }
 
-    // Re-enable transitions after theme switch is complete
     setTimeout(() => {
       document.body.classList.remove('theme-transitioning');
       setIsTransitioning(false);
     }, 300);
   };
 
-  /*
-   * Modal management functions
-   * openModal sets type, shows loading spinner, then reveals content
-   * Also closes mobile menu if it's open
-   */
+  // Modal functions
   const openModal = (type) => {
     setModalType(type);
     setModalLoading(true);
     setModalOpen(true);
-    setMenuOpen(false); // Close mobile menu when opening modal
+    setMenuOpen(false);
 
     setTimeout(() => {
       setModalLoading(false);
@@ -117,17 +101,13 @@ function App() {
   const closeMenu = () => setMenuOpen(false);
   const toggleMenu = () => setMenuOpen(!menuOpen);
 
-  // Smooth scroll to projects section - used by nav and footer
+  // Scroll to projects section
   const scrollToProjects = () => {
     document.querySelector('.projects').scrollIntoView({ behavior: 'smooth' });
-    if (menuOpen) setMenuOpen(false); // Close mobile menu after navigation
+    if (menuOpen) setMenuOpen(false);
   };
 
-  /*
-   * PROJECTS DATA
-   * My actual projects with the CORRECT live URLs (finally fixed that!)
-   * Ultraverse is live, others are placeholders for future projects
-   */
+  // Projects array
   const projects = [
     {
       icon: faGem,
@@ -137,36 +117,34 @@ function App() {
       status: "COMPLETED",
       imageUrl: "/images/NFT-LANDING-PAGE.png",
       githubUrl: "https://github.com/jradame/ultraverse-nft-project",
-      liveUrl: "https://ultraverse-nft-project.vercel.app/", // ✅ The URL that actually works now
+      liveUrl: "https://ultraverse-nft-project.vercel.app/",
       technologies: ["React", "CSS3", "JavaScript", "React Router", "Vercel"]
     },
     {
       icon: faGem,
-      title: "Dashboard Application", 
+      title: "Dashboard Application",
       category: "Frontend",
       description: "Interactive data visualization and analytics dashboard with real-time updates, charts, and responsive design for business intelligence.",
       status: "COMING SOON",
-      imageUrl: "https://via.placeholder.com/370x270/3b82f6/ffffff?text=Dashboard+Coming+Soon",
-      githubUrl: "https://github.com/yourusername/dashboard-project", // TODO: Update with real repo
-      liveUrl: null, // No live demo yet
+      githubUrl: "https://github.com/yourusername/dashboard-project",
+      liveUrl: null,
       technologies: ["React", "Chart.js", "CSS3"]
     },
     {
       icon: faGem,
       title: "E-Commerce Platform",
-      category: "Full Stack", 
+      category: "Full Stack",
       description: "Complete e-commerce solution with user authentication, payment processing, and admin dashboard built with modern technologies.",
       status: "COMING SOON",
-      imageUrl: "https://via.placeholder.com/370x270/06b6d4/ffffff?text=E-commerce+Coming+Soon",
-      githubUrl: "https://github.com/yourusername/ecommerce-project", // TODO: Update with real repo
-      liveUrl: null, // No live demo yet
+      githubUrl: "https://github.com/yourusername/ecommerce-project",
+      liveUrl: null,
       technologies: ["React", "Node.js", "MongoDB"]
     }
   ];
 
   return (
     <div className="App">
-      {/* NAVBAR - Fixed header with hamburger menu for mobile */}
+      {/* NAVBAR */}
       <nav className="navbar">
         <div className="nav-container">
           <button 
@@ -176,8 +154,6 @@ function App() {
           >
             Justin Adame
           </button>
-          
-          {/* Hamburger menu - only visible on mobile */}
           <button 
             className={`hamburger ${menuOpen ? 'active' : ''}`}
             onClick={toggleMenu}
@@ -188,11 +164,8 @@ function App() {
             <span className="bar"></span>
             <span className="bar"></span>
           </button>
-          
-          {/* Navigation links with loading skeletons */}
           <ul className={`nav__link--list ${menuOpen ? 'open' : ''}`}>
             {loading ? (
-              // Show skeleton placeholders while loading
               <div className="nav__links-skeleton">
                 <Skeleton width="60px" height="20px" />
                 <Skeleton width="70px" height="20px" />
@@ -226,42 +199,28 @@ function App() {
                   </button>
                 </li>
                 <li>
-                  {/* Theme toggle button with sun/moon icons */}
                   <button
                     className={`theme-toggle ${isDarkMode ? 'theme-toggle--dark' : ''}`}
                     onClick={toggleTheme}
-                    disabled={isTransitioning} // Prevent spam clicking
+                    disabled={isTransitioning}
                     aria-label={`Switch to ${isDarkMode ? 'light' : 'dark'} mode`}
                   >
-                    <FontAwesomeIcon 
-                      icon={isDarkMode ? faSun : faMoon} 
-                      className="theme-toggle__icon"
-                    />
+                    <FontAwesomeIcon icon={isDarkMode ? faSun : faMoon} className="theme-toggle__icon" />
                   </button>
                 </li>
               </>
             )}
           </ul>
         </div>
-        
-        {/* Mobile menu overlay - closes menu when clicking outside */}
-        {menuOpen && (
-          <div 
-            className="menu-overlay" 
-            onClick={closeMenu}
-            aria-label="Close menu"
-          />
-        )}
+        {menuOpen && <div className="menu-overlay" onClick={closeMenu} aria-label="Close menu" />}
       </nav>
 
-      {/* HERO SECTION - Main intro with gradient background */}
+      {/* HERO */}
       <section className="hero">
         <div className="hero-container">
           <div className="hero-content">
             <div className="hero-image">
-              {loading ? (
-                <Skeleton circle width="280px" height="280px" />
-              ) : (
+              {loading ? <Skeleton circle width="280px" height="280px" /> : (
                 <img 
                   src="https://via.placeholder.com/280x280/3b82f6/ffffff?text=JA" 
                   alt="Justin Adame" 
@@ -271,7 +230,6 @@ function App() {
             </div>
             <div className="hero-text">
               {loading ? (
-                // Loading skeletons that match the real content layout
                 <>
                   <Skeleton height="60px" width="80%" />
                   <Skeleton height="30px" width="90%" />
@@ -291,44 +249,20 @@ function App() {
                     amazing web experiences with modern technologies.
                   </p>
                   <div className="hero-buttons">
-                    <button className="btn btn-primary" onClick={() => openModal('about')}>
-                      About Me
-                    </button>
-                    <button className="btn btn-secondary" onClick={() => openModal('contact')}>
-                      Let's Talk
-                    </button>
+                    <button className="btn btn-primary" onClick={() => openModal('about')}>About Me</button>
+                    <button className="btn btn-secondary" onClick={() => openModal('contact')}>Let's Talk</button>
                   </div>
                 </>
               )}
-              
-              {/* Social links - only show after loading */}
               {!loading && (
                 <div className="social-links">
-                  <a
-                    href="https://linkedin.com/in/justin-adame"
-                    className="social-link"
-                    aria-label="LinkedIn Profile"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <FontAwesomeIcon icon={faLinkedin} />
+                  <a href="https://linkedin.com/in/justin-adame" className="social-link" aria-label="LinkedIn">
+                    <FontAwesomeIcon icon={faLinkedinBrand} />
                   </a>
-                  <a
-                    href="https://github.com/justin-adame"
-                    className="social-link"
-                    aria-label="GitHub Profile"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
+                  <a href="https://github.com/justin-adame" className="social-link" aria-label="GitHub">
                     <FontAwesomeIcon icon={faGithubBrand} />
                   </a>
-                  <a
-                    href="https://twitter.com/justin_adame"
-                    className="social-link"
-                    aria-label="Twitter Profile"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
+                  <a href="https://twitter.com/justin_adame" className="social-link" aria-label="Twitter">
                     <FontAwesomeIcon icon={faTwitter} />
                   </a>
                 </div>
@@ -338,28 +272,25 @@ function App() {
         </div>
       </section>
 
-      {/* PROJECTS SECTION - My work showcase */}
+      {/* PROJECTS */}
       <section className="projects">
         <div className="projects__container">
-          <h2 className="section__title">
-            My <span className="blue">Projects</span>
-          </h2>
+          <h2 className="section__title">My <span className="blue">Projects</span></h2>
           <div className="projects__cards">
             {loading ? (
-              // Loading state with skeleton placeholders
-              [...Array(3)].map((_, index) => (
-                <div key={index} className="project-block">
+              [...Array(3)].map((_, i) => (
+                <div key={i} className="project-block project-block--loading">
                   <div className="project-image-container">
                     <Skeleton height="270px" className="project-image-simple" />
                   </div>
                   <div className="project-simple-info">
                     <Skeleton width="70%" height="20px" />
                     <Skeleton count={2} />
-                    <div style={{ display: 'flex', gap: '0.8rem', marginTop: '0.6rem', justifyContent: 'center' }}>
+                    <div style={{ display: 'flex', gap: '0.8rem', marginTop: '0.6rem' }}>
                       <Skeleton width="80px" height="28px" />
                       <Skeleton width="60px" height="28px" />
                     </div>
-                    <div style={{ display: 'flex', gap: '0.3rem', marginTop: '0.6rem', justifyContent: 'center' }}>
+                    <div style={{ display: 'flex', gap: '0.3rem', marginTop: '0.6rem' }}>
                       <Skeleton width="45px" height="16px" />
                       <Skeleton width="45px" height="16px" />
                     </div>
@@ -367,49 +298,44 @@ function App() {
                 </div>
               ))
             ) : (
-              // Actual project cards
-              projects.map((project, index) => (
-                <div key={index} className="project-block">
+              projects.map((project, idx) => (
+                <div key={idx} className="project-block">
                   <div className="project-image-container">
-                    <img
-                      src={project.imageUrl}
-                      alt={`${project.title} screenshot`}
-                      className="project-image-simple"
-                      onError={e => {
-                        // Fallback to placeholder if image fails to load
-                        e.target.src = `https://via.placeholder.com/370x270/3b82f6/ffffff?text=${encodeURIComponent(project.title)}`;
-                      }}
-                    />
+                    {project.imageUrl ? (
+                      <img
+                        src={project.imageUrl}
+                        alt={`${project.title} screenshot`}
+                        className="project-image-simple"
+                        onError={e => {
+                          e.target.src = `https://via.placeholder.com/370x270/3b82f6/ffffff?text=${encodeURIComponent(project.title)}`;
+                        }}
+                      />
+                    ) : (
+                      <div className="project-icon-placeholder">
+                        <FontAwesomeIcon icon={project.icon} />
+                        <div className="project-status-overlay">
+                          <FontAwesomeIcon icon={faCalendarAlt} />
+                          <span>{project.status}</span>
+                        </div>
+                      </div>
+                    )}
                   </div>
                   <div className="project-simple-info">
                     <h3 className="project-simple-title">{project.title}</h3>
                     <p className="project-simple-desc">{project.description}</p>
                     <div className="project-simple-links">
-                      {/* Only show Live Demo button if there's actually a live URL */}
                       {project.liveUrl && (
-                        <a
-                          href={project.liveUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="project-simple-btn"
-                        >
-                          <FontAwesomeIcon icon={faExternalLinkAlt} />
-                          Live Demo
+                        <a href={project.liveUrl} className="project-simple-btn" target="_blank" rel="noopener noreferrer">
+                          <FontAwesomeIcon icon={faExternalLinkAlt} /> Live Demo
                         </a>
                       )}
-                      <a
-                        href={project.githubUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="project-simple-btn project-simple-btn-github"
-                      >
-                        <FontAwesomeIcon icon={faGithubBrand} />
-                        GitHub
+                      <a href={project.githubUrl} className="project-simple-btn project-simple-btn-github" target="_blank" rel="noopener noreferrer">
+                        <FontAwesomeIcon icon={faGithubBrand} /> GitHub
                       </a>
                     </div>
                     <div className="project-simple-tags">
-                      {project.technologies.map((tech, techIndex) => (
-                        <span key={techIndex} className="project-simple-tag">{tech}</span>
+                      {project.technologies.map((tech, tIdx) => (
+                        <span key={tIdx} className="project-simple-tag">{tech}</span>
                       ))}
                     </div>
                   </div>
@@ -420,100 +346,10 @@ function App() {
         </div>
       </section>
 
-      {/* FOOTER - Three column layout with links and contact info */}
-      <footer className="footer">
-        <div className="footer__container">
-          <div className="footer__content">
-            {/* Brand section */}
-            <div className="footer__section--brand">
-              <h3 className="footer__brand">Justin Adame</h3>
-              <p className="footer__description">
-                Frontend Developer passionate about creating beautiful, user-friendly web experiences with modern technologies.
-              </p>
-              <div className="footer__social">
-                <a
-                  href="https://linkedin.com/in/justin-adame"
-                  className="footer__social-link"
-                  aria-label="LinkedIn"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <FontAwesomeIcon icon={faLinkedin} />
-                </a>
-                <a
-                  href="https://github.com/justin-adame"
-                  className="footer__social-link"
-                  aria-label="GitHub"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <FontAwesomeIcon icon={faGithubBrand} />
-                </a>
-                <a
-                  href="https://twitter.com/justin_adame"
-                  className="footer__social-link"
-                  aria-label="Twitter"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <FontAwesomeIcon icon={faTwitter} />
-                </a>
-              </div>
-            </div>
-            
-            {/* Quick links section */}
-            <div className="footer__section">
-              <h4 className="footer__section-title">Quick Links</h4>
-              <ul className="footer__links">
-                <li>
-                  <button className="footer__link" onClick={() => openModal('about')}>
-                    About
-                  </button>
-                </li>
-                <li>
-                  <button className="footer__link" onClick={scrollToProjects}>
-                    Projects
-                  </button>
-                </li>
-                <li>
-                  <button className="footer__link" onClick={() => openModal('contact')}>
-                    Contact
-                  </button>
-                </li>
-              </ul>
-            </div>
-            
-            {/* Contact section */}
-            <div className="footer__section">
-              <h4 className="footer__section-title">Get In Touch</h4>
-              <div className="footer__contact">
-                <a
-                  href="mailto:your.email@example.com" // TODO: Update with real email
-                  className="footer__contact-item"
-                  aria-label="Send email"
-                >
-                  <FontAwesomeIcon icon={faEnvelope} />
-                  your.email@example.com
-                </a>
-                <p className="footer__contact-text">
-                  Let's connect and build something amazing together!
-                </p>
-              </div>
-            </div>
-          </div>
-          
-          {/* Copyright section */}
-          <div className="footer__bottom">
-            <div className="footer__copyright">
-              <p>
-                © 2025 Justin Adame. Made with <span className="footer__heart">♥</span> using React & CSS.
-              </p>
-            </div>
-          </div>
-        </div>
-      </footer>
-      
-      {/* Modal component - handles both about and contact modals */}
+      {/* FOOTER */}
+      <Footer loading={loading} toggleModal={openModal} />
+
+      {/* MODAL */}
       <Modal
         isOpen={modalOpen}
         onClose={closeModal}
@@ -526,5 +362,9 @@ function App() {
 }
 
 export default App;
+
+
+
+
 
 
