@@ -5,7 +5,7 @@
 
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faRocket, faCode, faPalette, faCalendarAlt, faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
+import { faRocket, faPalette, faCalendarAlt, faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import Skeleton from 'react-loading-skeleton';
 import ScrollReveal from './ScrollReveal';
@@ -21,8 +21,8 @@ const Projects = ({ loading }) => {
       title: "Ultraverse NFT Marketplace",
       description: "Built this React NFT marketplace from scratch with dark/light themes and smooth navigation. Pretty happy with how clean it turned out.",
       image: "/images/ultraverse-screenshot.png", 
-      liveUrl: "https://ultraverse-nft-project.vercel.app/", // ✅ CORRECT
- 
+      liveUrl: "https://ultraverse-nft-project.vercel.app/"
+, 
       githubUrl: "https://github.com/jradame/ultraverse-nft-project",
       technologies: ["React", "CSS3", "JavaScript", "React Router", "Vercel"],
       category: "Frontend",
@@ -172,6 +172,7 @@ const Projects = ({ loading }) => {
 };
 
 export default Projects;
+
 
 
 
