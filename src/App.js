@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSun, faMoon, faExternalLinkAlt, faGem, faUser, faEnvelope } from '@fortawesome/free-solid-svg-icons';
-
 import { faLinkedin, faGithub as faGithubBrand, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
@@ -460,14 +459,13 @@ function App() {
               <h4 className="footer__section-title">Get In Touch</h4>
               <div className="footer__contact">
                 <a 
-  href="mailto:your.email@example.com" 
-  className="footer__contact-item"
-  aria-label="Send email"
->
-  <FontAwesomeIcon icon={faEnvelope} />
-  your.email@example.com
-</a>
-
+                  href="mailto:your.email@example.com" 
+                  className="footer__contact-item"
+                  aria-label="Send email"
+                >
+                  <FontAwesomeIcon icon={faEnvelope} />
+                  your.email@example.com
+                </a>
                 <p className="footer__contact-text">
                   Let's connect and build something amazing together!
                 </p>
@@ -499,4 +497,5 @@ function App() {
 }
 
 export default App;
+
 

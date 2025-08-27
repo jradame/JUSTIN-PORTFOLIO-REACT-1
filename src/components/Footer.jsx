@@ -1,3 +1,9 @@
+/* 
+ * Footer Component - Three-column layout with brand, quick links, and contact
+ * Includes loading states, smooth scrolling, and modal interactions
+ * Designed to match the rest of the app's theme system and responsive design
+ */
+
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLinkedinIn, faGithub } from '@fortawesome/free-brands-svg-icons';
@@ -5,9 +11,13 @@ import { faFilePdf, faEnvelope, faHeart } from '@fortawesome/free-solid-svg-icon
 import Skeleton from 'react-loading-skeleton';
 
 const Footer = ({ loading, toggleModal }) => {
+  // Dynamic year for copyright - keeps the footer current automatically
   const currentYear = new Date().getFullYear();
 
-  // Scroll to top function (same as navbar)
+  /* 
+   * Smooth scroll to top functionality
+   * Same behavior as the navbar logo - creates consistent UX
+   */
   const scrollToTop = () => {
     window.scrollTo({ 
       top: 0, 
@@ -16,12 +26,19 @@ const Footer = ({ loading, toggleModal }) => {
     });
   };
 
-  // Handle brand click (same as navbar)
+  /* 
+   * Handle brand logo clicks
+   * Prevents default behavior and smoothly scrolls to top
+   */
   const handleBrandClick = (e) => {
     e.preventDefault();
     scrollToTop();
   };
 
+  /* 
+   * Social media and resume links
+   * Centralized data makes it easy to update links or add new ones
+   */
   const socialLinks = [
     {
       name: "LinkedIn",
@@ -35,28 +52,39 @@ const Footer = ({ loading, toggleModal }) => {
     },
     {
       name: "Resume",
-      url: "#",
+      url: "#", // Update this with actual resume link
       icon: faFilePdf
     }
   ];
 
-  // Handle quick link clicks
+  /* 
+   * Handle navigation from footer quick links
+   * Projects scrolls to section, others open modals
+   */
   const handleQuickLinkClick = (type) => {
     if (type === 'projects') {
+      // Scroll to projects section instead of opening modal
       const element = document.getElementById('projects');
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
       }
     } else {
+      // Open modal for about/contact
       toggleModal(type);
     }
   };
 
+  /* 
+   * Loading state with skeleton placeholders
+   * Maintains layout structure while content loads
+   * Uses consistent skeleton styling with rest of app
+   */
   if (loading) {
     return (
       <footer className="footer">
         <div className="footer__container">
           <div className="footer__content">
+            {/* Brand section skeleton */}
             <div className="footer__section footer__section--brand">
               <Skeleton width="200px" height="32px" />
               <Skeleton count={2} />
@@ -67,6 +95,7 @@ const Footer = ({ loading, toggleModal }) => {
               </div>
             </div>
             
+            {/* Quick links skeleton */}
             <div className="footer__section">
               <Skeleton width="100px" height="20px" className="footer__section-title-skeleton" />
               {[...Array(3)].map((_, index) => (
@@ -74,6 +103,7 @@ const Footer = ({ loading, toggleModal }) => {
               ))}
             </div>
             
+            {/* Contact section skeleton */}
             <div className="footer__section">
               <Skeleton width="120px" height="20px" className="footer__section-title-skeleton" />
               <Skeleton width="200px" height="16px" />
@@ -93,18 +123,24 @@ const Footer = ({ loading, toggleModal }) => {
     <footer className="footer">
       <div className="footer__container">
         <div className="footer__content">
-          {/* Brand Section - NOW CLICKABLE */}
+          {/* 
+           * Brand Section (Left Column)
+           * Clickable brand name, description, and social links
+           */}
           <div className="footer__section footer__section--brand">
             <button
               className="footer__brand footer__brand-button"
               onClick={handleBrandClick}
               type="button"
+              aria-label="Scroll to top"
             >
               Justin Adame
             </button>
             <p className="footer__description">
               Frontend Developer passionate about creating beautiful, user-friendly web experiences with modern technologies.
             </p>
+            
+            {/* Social media links with proper accessibility */}
             <div className="footer__social">
               {socialLinks.map((link, index) => (
                 <a
@@ -122,7 +158,10 @@ const Footer = ({ loading, toggleModal }) => {
             </div>
           </div>
 
-          {/* Quick Links */}
+          {/* 
+           * Quick Links (Center Column)
+           * Navigation shortcuts to main sections
+           */}
           <div className="footer__section">
             <h4 className="footer__section-title">Quick Links</h4>
             <ul className="footer__links">
@@ -156,7 +195,10 @@ const Footer = ({ loading, toggleModal }) => {
             </ul>
           </div>
 
-          {/* Contact Info */}
+          {/* 
+           * Contact Info (Right Column)
+           * Direct contact access and encouragement text
+           */}
           <div className="footer__section">
             <h4 className="footer__section-title">Get In Touch</h4>
             <div className="footer__contact">
@@ -175,7 +217,10 @@ const Footer = ({ loading, toggleModal }) => {
           </div>
         </div>
 
-        {/* Bottom Section */}
+        {/* 
+         * Bottom Section
+         * Copyright with animated heart and tech stack mention
+         */}
         <div className="footer__bottom">
           <div className="footer__copyright">
             <p>
@@ -191,4 +236,5 @@ const Footer = ({ loading, toggleModal }) => {
 };
 
 export default Footer;
+
 

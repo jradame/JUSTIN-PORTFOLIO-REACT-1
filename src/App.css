@@ -1,8 +1,13 @@
-/* Import skeleton CSS */
+/* 
+ * Ultraverse NFT Marketplace - Main Stylesheet
+ * Built this React portfolio project from scratch
+ * Features: Dark/light theme switching, responsive design, smooth animations
+ */
+
 @import 'react-loading-skeleton/dist/skeleton.css';
 
 /* ==========================================================================
-   GLOBAL RESET & VARIABLES
+   GLOBAL SETUP & THEME SYSTEM
    ========================================================================== */
 
 * {
@@ -12,6 +17,7 @@
   font-family: "Roboto", sans-serif;
 }
 
+/* Theme colors using CSS variables - makes switching themes really easy */
 :root {
   --bg-primary: #ffffff;
   --bg-secondary: #f8fafc;
@@ -27,6 +33,7 @@
   --success: #059669;
 }
 
+/* Dark mode just overrides the same variable names */
 .dark-theme {
   --bg-primary: #000000;
   --bg-secondary: #1e293b;
@@ -41,11 +48,12 @@
   --accent: #22d3ee;
 }
 
-/* Common transitions */
+/* Smooth transitions on everything - makes interactions feel polished */
 *, .theme-toggle__icon, .tech-icon svg, .tech-name, .modal__exit, .input, .nav__link--anchor::after {
   transition: all 0.3s ease;
 }
 
+/* Turn off transitions when switching themes to avoid weird flickers */
 .theme-transitioning * { transition: none !important; }
 
 body {
@@ -56,6 +64,7 @@ body {
 
 .App { text-align: center; }
 
+/* Utility class for that signature blue gradient text */
 .blue {
   background: linear-gradient(135deg, var(--primary), var(--accent));
   -webkit-background-clip: text;
@@ -64,16 +73,17 @@ body {
 }
 
 /* ==========================================================================
-   NAVBAR & HAMBURGER MENU
+   NAVIGATION BAR
    ========================================================================== */
 
+/* Fixed nav with glassmorphism blur effect */
 .navbar {
   position: fixed;
   top: 0;
   width: 100%;
   z-index: 1000;
   background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px); /* This creates the glass effect */
   border-bottom: 1px solid var(--border-color);
 }
 
@@ -101,7 +111,7 @@ body {
 
 .nav__logo-text:hover { transform: scale(1.1); }
 
-/* Hamburger Menu */
+/* Hamburger Menu - only shows on mobile */
 .hamburger {
   display: none;
   flex-direction: column;
@@ -120,6 +130,7 @@ body {
   border-radius: 2px;
 }
 
+/* Animate hamburger bars into X when menu is open */
 .hamburger.active .bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
 .hamburger.active .bar:nth-child(2) { opacity: 0; }
 .hamburger.active .bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
@@ -131,6 +142,7 @@ body {
   list-style: none;
 }
 
+/* Nav links with animated underline hover effect */
 .nav__link--anchor {
   background: none;
   border: none;
@@ -143,6 +155,7 @@ body {
   text-decoration: none;
 }
 
+/* The animated underline */
 .nav__link--anchor::after {
   content: '';
   position: absolute;
@@ -159,7 +172,7 @@ body {
   transform: translateY(-2px); 
 }
 
-/* Theme Toggle */
+/* Theme Toggle Button */
 .theme-toggle {
   width: 44px !important;
   height: 44px !important;
@@ -194,7 +207,7 @@ body {
   align-items: center;
   justify-content: center;
   padding: 2rem;
-  padding-top: 100px;
+  padding-top: 100px; /* Account for the fixed navbar */
   background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
   color: white;
 }
@@ -242,7 +255,7 @@ body {
   margin-bottom: 2rem;
 }
 
-/* Button Styles */
+/* Button System with shimmer effects */
 .btn {
   position: relative;
   padding: 1rem 2.5rem;
@@ -256,6 +269,7 @@ body {
   overflow: hidden;
 }
 
+/* Shimmer effect - that light sweep across buttons on hover */
 .btn::before {
   content: '';
   position: absolute;
@@ -320,6 +334,7 @@ body {
   box-shadow: 0 15px 35px rgba(255, 255, 255, 0.3);
 }
 
+/* Waving hand animation */
 .wave {
   display: inline-block;
   animation: wave-animation 2.5s ease-in-out infinite;
@@ -337,8 +352,13 @@ body {
 }
 
 /* ==========================================================================
-   PROJECTS SECTION - ENHANCED IMAGE & BUTTON SPACING
+   PROJECTS SECTION - CLEAN, NO BORDERS DESIGN
    ========================================================================== */
+
+/* 
+ * Design decision: Borderless project cards that rely on typography and spacing
+ * Let the project images and descriptions do the talking without visual clutter
+ */
 
 .projects {
   min-height: 100vh;
@@ -352,6 +372,7 @@ body {
 
 .dark-theme .projects { background: linear-gradient(135deg, #000000 0%, #0f172a 100%); }
 
+/* Subtle background decoration using radial gradients */
 .projects::before {
   content: '';
   position: absolute;
@@ -396,61 +417,97 @@ body {
   flex-wrap: wrap;
 }
 
-/* ENHANCED PROJECT LAYOUT */
+/* Project cards with aggressively removed borders */
 .project-block {
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  padding: 0 !important;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   flex: 1;
   max-width: 370px;
   min-width: 320px;
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 2rem;
-  background: none;
 }
 
-/* Enhanced image container with subtle depth */
 .project-image-container {
   width: 100%;
   aspect-ratio: 3/4;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: none;
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
   position: relative;
-  margin-bottom: 1.2rem; /* Slightly more space below image */
-  border-radius: 8px; /* Subtle rounded corners */
-  overflow: hidden; /* Ensure image respects border radius */
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05); /* Very subtle shadow for depth */
+  margin-bottom: 1.2rem;
+  border-radius: 0 !important;
+  overflow: visible !important;
   transition: all 0.3s ease;
 }
 
 .project-image-container:hover {
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Slightly more shadow on hover */
-  transform: translateY(-2px); /* Subtle lift effect */
+  transform: translateY(-2px);
+  box-shadow: none !important;
 }
 
-.dark-theme .project-image-container {
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
-}
-
-.dark-theme .project-image-container:hover {
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-}
-
+/* Clean project images with no styling interference */
 .project-image-simple {
   max-width: 100%;
   max-height: 100%;
   display: block;
-  border-radius: 8px; /* Match container */
-  border: none;
-  box-shadow: none;
+  border-radius: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
   background: none !important;
   background-color: transparent !important;
   object-fit: contain;
   transition: transform 0.3s ease;
-  padding: 0;
-  outline: none;
+  padding: 0 !important;
+  outline: none !important;
+  margin: 0 !important;
+}
+
+.project-image-simple:hover {
+  transform: translateY(-2px);
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* Make sure no inherited borders creep in anywhere */
+body:not(.dark-theme) .project-block {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+body:not(.dark-theme) .project-image-container {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+body:not(.dark-theme) .project-image-simple {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.projects * {
+  border: none !important;
+}
+
+.projects .project-block * {
+  border: none !important;
+  outline: none !important;
 }
 
 .project-simple-info {
@@ -465,23 +522,22 @@ body {
 .project-simple-title {
   font-size: 1.2rem;
   font-weight: 700;
-  margin-bottom: 0.6rem; /* Slightly more space */
+  margin-bottom: 0.6rem;
   color: var(--text-primary);
   line-height: 1.3;
 }
 
 .project-simple-desc {
-  margin-bottom: 1.2rem; /* More space before buttons */
+  margin-bottom: 1.2rem;
   font-size: 0.9rem;
   color: var(--text-secondary);
   line-height: 1.4;
 }
 
-/* IMPROVED BUTTON SPACING & STYLING */
 .project-simple-links {
   margin-bottom: 1.2rem;
   display: flex;
-  gap: 1rem; /* Increased gap between buttons */
+  gap: 1rem;
   justify-content: center;
 }
 
@@ -492,14 +548,14 @@ body {
   background: var(--primary);
   color: #fff;
   border: none;
-  border-radius: 8px; /* More rounded buttons */
-  padding: 0.6rem 1.2rem; /* Slightly larger buttons */
+  border-radius: 8px;
+  padding: 0.6rem 1.2rem;
   font-size: 0.85rem;
   font-weight: 600;
   text-decoration: none;
   transition: all 0.3s ease;
   cursor: pointer;
-  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.2); /* Subtle shadow */
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.2);
 }
 
 .project-simple-btn:hover { 
@@ -508,6 +564,7 @@ body {
   box-shadow: 0 4px 16px rgba(6, 182, 212, 0.3);
 }
 
+/* GitHub button gets special dark styling */
 .project-simple-btn-github { 
   background: #393e4c;
   box-shadow: 0 2px 8px rgba(57, 62, 76, 0.2);
@@ -521,7 +578,7 @@ body {
 .project-simple-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.4rem; /* Slightly more space between tags */
+  gap: 0.4rem;
   justify-content: center;
 }
 
@@ -530,7 +587,7 @@ body {
   color: var(--primary);
   border-radius: 6px;
   font-size: 0.7rem;
-  padding: 0.3rem 0.6rem; /* Slightly more padding */
+  padding: 0.3rem 0.6rem;
   font-weight: 600;
   display: inline-block;
   transition: all 0.2s ease;
@@ -551,7 +608,7 @@ body {
 }
 
 /* ==========================================================================
-   MODAL SYSTEM (UNCHANGED)
+   MODAL SYSTEM
    ========================================================================== */
 
 .modal-overlay {
@@ -595,6 +652,7 @@ body {
 
 .dark-theme .modal.open { box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6); }
 
+/* Split modal design - left and right halves */
 .modal__half {
   width: 50%;
   height: 100%;
@@ -628,6 +686,7 @@ body {
 
 .dark-theme .modal__right { background: var(--bg-secondary); }
 
+/* Slide-in animations for modal halves */
 .modal__left.slide-in, .modal__right.slide-in {
   transform: translateX(0);
   opacity: 1;
@@ -668,6 +727,7 @@ body {
   text-align: center;
 }
 
+/* Tech stack icons in modal */
 .modal__languages {
   display: flex;
   flex-wrap: wrap;
@@ -708,6 +768,7 @@ body {
 
 .tech-icon:hover .tech-name { opacity: 1; }
 
+/* Individual tech icon colors */
 .html-icon svg { color: #e44d26; }
 .css-icon svg { color: #1572b6; }
 .js-icon svg { color: #f0db4f; }
@@ -719,6 +780,7 @@ body {
   to { transform: rotate(360deg); }
 }
 
+/* Contact info section */
 .modal__contact-info {
   height: 100%;
   display: flex;
@@ -763,6 +825,7 @@ body {
   margin-bottom: 1.5rem;
 }
 
+/* Modal close button */
 .modal__exit {
   position: absolute;
   top: 15px;
@@ -780,6 +843,7 @@ body {
   transform: scale(1.1);
 }
 
+/* Contact form styling */
 .form {
   display: flex;
   flex-direction: column;
@@ -827,6 +891,7 @@ body {
 
 .input::placeholder { color: var(--text-muted); opacity: 0.7; }
 
+/* Submit button with loading states */
 .form__submit {
   background: linear-gradient(135deg, var(--primary), var(--accent));
   color: white;
@@ -853,6 +918,7 @@ body {
 
 .form__submit:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
 
+/* Loading spinner for form submission */
 .form__submit--loading::after {
   content: '';
   position: absolute;
@@ -872,6 +938,7 @@ body {
   100% { transform: rotate(360deg); }
 }
 
+/* Success state after form submission */
 .form__success {
   text-align: center;
   padding: 1.5rem 0.5rem;
@@ -907,7 +974,7 @@ body {
 .form__success p { color: var(--text-muted); font-size: 0.9rem; }
 
 /* ==========================================================================
-   FOOTER STYLES - PERFECTLY CENTERED SOCIAL ICONS
+   FOOTER - THREE COLUMN LAYOUT
    ========================================================================== */
 
 .footer {
@@ -931,19 +998,20 @@ body {
 
 .footer__content {
   display: grid;
-  grid-template-columns: 2fr 1fr 1.5fr;
-  gap: 3rem;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2rem;
   margin-bottom: 3rem;
+  align-items: flex-start;
 }
 
-/* BRAND SECTION - PERFECTLY CENTERED */
+/* Left section - brand and social */
 .footer__section--brand {
-  max-width: 350px;
-  text-align: center;
+  max-width: none;
+  text-align: left;
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .footer__brand {
@@ -973,12 +1041,12 @@ body {
   line-height: 1.6;
   margin-bottom: 1.5rem;
   font-size: 0.95rem;
-  text-align: center;
+  text-align: left;
 }
 
 .footer__social {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   gap: 1.5rem;
   margin-top: 1.2rem;
@@ -1012,7 +1080,14 @@ body {
   box-shadow: 0 8px 20px rgba(34, 211, 238, 0.3);
 }
 
-/* SECTION STYLES */
+/* Middle section - centered links */
+.footer__section {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .footer__section-title {
   font-size: 1.1rem;
   font-weight: 700;
@@ -1027,6 +1102,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+  align-items: center;
 }
 
 .footer__link {
@@ -1039,7 +1115,7 @@ body {
   font-family: inherit;
   cursor: pointer;
   transition: color 0.3s ease;
-  text-align: left;
+  text-align: center;
   font-weight: 400;
 }
 
@@ -1053,11 +1129,23 @@ body {
   outline-offset: 2px;
 }
 
-/* CONTACT SECTION */
+/* Right section - contact info */
+.footer__section:last-child {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.footer__section:last-child .footer__section-title {
+  text-align: right;
+}
+
 .footer__contact {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  align-items: flex-end;
 }
 
 .footer__contact-item {
@@ -1074,7 +1162,7 @@ body {
   padding: 0.75rem 1rem;
   cursor: pointer;
   transition: all 0.3s ease;
-  width: 100%;
+  width: fit-content;
   max-width: 280px;
 }
 
@@ -1099,10 +1187,11 @@ body {
   font-size: 0.9rem;
   line-height: 1.5;
   margin: 0;
-  padding: 0.5rem;
+  padding: 0.5rem 0;
+  text-align: right;
 }
 
-/* BOTTOM SECTION */
+/* Bottom copyright section */
 .footer__bottom {
   padding-top: 2rem;
   border-top: 1px solid var(--border-color);
@@ -1133,10 +1222,11 @@ body {
 }
 
 /* ==========================================================================
-   RESPONSIVE DESIGN
+   RESPONSIVE DESIGN - MOBILE FIRST APPROACH
    ========================================================================== */
 
 @media (max-width: 768px) {
+  /* Mobile navigation */
   .hamburger { display: flex; }
   
   .nav__link--list {
@@ -1171,6 +1261,7 @@ body {
     to { opacity: 1; transform: translateY(0) scale(1); }
   }
   
+  /* Overlay when mobile menu is open */
   .menu-overlay {
     position: fixed;
     top: 0;
@@ -1181,6 +1272,7 @@ body {
     z-index: 998;
   }
   
+  /* Mobile hero adjustments */
   .hero-content {
     grid-template-columns: 1fr;
     gap: 2rem;
@@ -1206,6 +1298,7 @@ body {
   
   .social-link { width: 50px; height: 50px; font-size: 1.2rem; }
   
+  /* Mobile projects section */
   .projects { padding: 80px 1rem 60px; }
   .section__title { font-size: 2rem; margin-bottom: 3rem; }
   
@@ -1214,14 +1307,13 @@ body {
     align-items: center;
   }
   
-  /* MOBILE PROJECT BLOCKS */
   .project-block {
     max-width: 100%;
     min-width: auto;
   }
   
   .project-image-container {
-    aspect-ratio: 4/5; /* Slightly different aspect ratio for mobile */
+    aspect-ratio: 4/5;
   }
   
   .project-simple-links {
@@ -1234,6 +1326,7 @@ body {
     max-width: 200px;
   }
   
+  /* Mobile modal adjustments */
   .modal {
     flex-direction: column;
     width: 95vw;
@@ -1263,11 +1356,7 @@ body {
   .tech-icon { width: 50px; height: 50px; }
   .tech-icon svg { font-size: 1.5rem; }
   
-  /* FOOTER MOBILE */
-  .footer {
-    padding: 3rem 1rem 2rem;
-  }
-  
+  /* Mobile footer */
   .footer__content {
     grid-template-columns: 1fr;
     gap: 2rem;
@@ -1275,23 +1364,42 @@ body {
   }
   
   .footer__section--brand {
-    max-width: none;
+    text-align: center;
+    align-items: center;
+  }
+  
+  .footer__description {
+    text-align: center;
   }
   
   .footer__social {
     justify-content: center;
   }
   
-  .footer__links {
+  .footer__section {
+    text-align: center;
     align-items: center;
   }
   
-  .footer__contact-item {
-    max-width: 300px;
-    margin: 0 auto;
+  .footer__section:last-child {
+    text-align: center;
+    align-items: center;
+  }
+  
+  .footer__section:last-child .footer__section-title {
+    text-align: center;
+  }
+  
+  .footer__contact {
+    align-items: center;
+  }
+  
+  .footer__contact-text {
+    text-align: center;
   }
 }
 
+/* Extra small mobile devices */
 @media (max-width: 480px) {
   .nav__link--list { right: 10px; padding: 1rem; min-width: 180px; }
   .hero-headshot { width: 150px; height: 150px; }
@@ -1305,7 +1413,6 @@ body {
   .modal { width: 98vw; height: 95vh; }
   .tech-icon { width: 45px; height: 45px; }
   
-  /* FOOTER SMALL MOBILE */
   .footer {
     padding: 2.5rem 0.5rem 2rem;
   }
@@ -1341,7 +1448,7 @@ body {
   }
 }
 
-/* Performance & Accessibility */
+/* Accessibility - respect user's motion preferences */
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.01ms !important;
@@ -1351,12 +1458,15 @@ body {
   .wave { animation: none; }
 }
 
+/* Custom scrollbar styling */
 ::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: var(--bg-secondary); }
 ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
 
+/* Smooth scrolling for anchor links */
 html { scroll-behavior: smooth; }
+
 
 
 
