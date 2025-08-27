@@ -37,7 +37,6 @@ function App() {
       document.body.classList.remove('dark-theme');
     }
 
-    // Simulate initial loading
     const timer = setTimeout(() => {
       setLoading(false);
     }, 2000);
@@ -87,33 +86,29 @@ function App() {
   };
 
   // Close mobile menu
-  const closeMenu = () => {
-    setMenuOpen(false);
-  };
+  const closeMenu = () => setMenuOpen(false);
 
   // Toggle mobile menu
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
-  };
+  const toggleMenu = () => setMenuOpen(!menuOpen);
 
   // Scroll to projects section
   const scrollToProjects = () => {
     document.querySelector('.projects').scrollIntoView({ behavior: 'smooth' });
-    if (menuOpen) setMenuOpen(false); // Close mobile menu
+    if (menuOpen) setMenuOpen(false);
   };
 
-  // **YOUR PROJECTS WITH REAL VERCEL URL**
+  // Projects array with the correct LIVE URL
   const projects = [
     {
       icon: faGem,
-      title: "NFT Marketplace Landing Page",
+      title: "Ultraverse NFT Marketplace",
       category: "Frontend Development",
-      description: "Modern, responsive landing page for Ultraverse NFT marketplace featuring clean UI design, smooth animations, and mobile-first approach with Web3 aesthetics.",
+      description: "Built this React NFT marketplace from scratch with dark/light themes and smooth navigation. Pretty happy with how clean it turned out.",
       status: "COMPLETED",
-      imageUrl: "/images/NFT-LANDING-PAGE.png", // Your actual screenshot
-      githubUrl: "https://github.com/yourusername/nft-landing-page", // Replace with your actual repo
-      liveUrl: "https://justin-internship-rho.vercel.app", // 🎯 YOUR ACTUAL VERCEL URL
-      technologies: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "UI/UX"]
+      imageUrl: "/images/NFT-LANDING-PAGE.png",
+      githubUrl: "https://github.com/jradame/ultraverse-nft-project",
+      liveUrl: "https://ultraverse-nft-project.vercel.app/", // ✅ Correct live URL
+      technologies: ["React", "CSS3", "JavaScript", "React Router", "Vercel"]
     },
     {
       icon: faGem,
@@ -123,25 +118,25 @@ function App() {
       status: "COMING SOON",
       imageUrl: "https://via.placeholder.com/370x270/3b82f6/ffffff?text=Dashboard+Coming+Soon",
       githubUrl: "https://github.com/yourusername/dashboard-project",
-      liveUrl: null, // Set to null for coming soon projects
+      liveUrl: null,
       technologies: ["React", "Chart.js", "CSS3"]
     },
     {
       icon: faGem,
-      title: "E-commerce Platform",
+      title: "E-Commerce Platform",
       category: "Full Stack", 
       description: "Complete e-commerce solution with user authentication, payment processing, and admin dashboard built with modern technologies.",
       status: "COMING SOON",
       imageUrl: "https://via.placeholder.com/370x270/06b6d4/ffffff?text=E-commerce+Coming+Soon",
       githubUrl: "https://github.com/yourusername/ecommerce-project",
-      liveUrl: null, // Set to null for coming soon projects
+      liveUrl: null,
       technologies: ["React", "Node.js", "MongoDB"]
     }
   ];
 
   return (
     <div className="App">
-      {/* NAVBAR WITH HAMBURGER MENU */}
+      {/* NAVBAR */}
       <nav className="navbar">
         <div className="nav-container">
           <button 
@@ -151,8 +146,6 @@ function App() {
           >
             Justin Adame
           </button>
-
-          {/* HAMBURGER MENU BUTTON */}
           <button 
             className={`hamburger ${menuOpen ? 'active' : ''}`}
             onClick={toggleMenu}
@@ -163,8 +156,6 @@ function App() {
             <span className="bar"></span>
             <span className="bar"></span>
           </button>
-
-          {/* NAVIGATION LINKS - WITH PROJECTS LINK ADDED */}
           <ul className={`nav__link--list ${menuOpen ? 'open' : ''}`}>
             {loading ? (
               <div className="nav__links-skeleton">
@@ -216,8 +207,6 @@ function App() {
             )}
           </ul>
         </div>
-
-        {/* MOBILE MENU OVERLAY */}
         {menuOpen && (
           <div 
             className="menu-overlay" 
@@ -272,30 +261,29 @@ function App() {
                   </div>
                 </>
               )}
-              
               {!loading && (
                 <div className="social-links">
-                  <a 
-                    href="https://linkedin.com/in/justin-adame" 
-                    className="social-link" 
+                  <a
+                    href="https://linkedin.com/in/justin-adame"
+                    className="social-link"
                     aria-label="LinkedIn Profile"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     <FontAwesomeIcon icon={faLinkedin} />
                   </a>
-                  <a 
-                    href="https://github.com/justin-adame" 
-                    className="social-link" 
+                  <a
+                    href="https://github.com/justin-adame"
+                    className="social-link"
                     aria-label="GitHub Profile"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     <FontAwesomeIcon icon={faGithubBrand} />
                   </a>
-                  <a 
-                    href="https://twitter.com/justin_adame" 
-                    className="social-link" 
+                  <a
+                    href="https://twitter.com/justin_adame"
+                    className="social-link"
                     aria-label="Twitter Profile"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -309,7 +297,7 @@ function App() {
         </div>
       </section>
 
-      {/* PROJECTS SECTION - WITH YOUR LIVE VERCEL URL */}
+      {/* PROJECTS SECTION */}
       <section className="projects">
         <div className="projects__container">
           <h2 className="section__title">
@@ -339,24 +327,20 @@ function App() {
             ) : (
               projects.map((project, index) => (
                 <div key={index} className="project-block">
-                  {/* IMAGE CONTAINER: shows full image without cropping */}
                   <div className="project-image-container">
-                    <img 
+                    <img
                       src={project.imageUrl}
                       alt={`${project.title} screenshot`}
                       className="project-image-simple"
-                      onError={(e) => {
-                        // Fallback to placeholder if image fails to load
+                      onError={e => {
                         e.target.src = `https://via.placeholder.com/370x270/3b82f6/ffffff?text=${encodeURIComponent(project.title)}`;
                       }}
                     />
                   </div>
-                  {/* INFORMATION BELOW - CENTERED */}
                   <div className="project-simple-info">
                     <h3 className="project-simple-title">{project.title}</h3>
                     <p className="project-simple-desc">{project.description}</p>
                     <div className="project-simple-links">
-                      {/* CONDITIONAL RENDERING: Only show Live Demo if URL exists */}
                       {project.liveUrl && (
                         <a
                           href={project.liveUrl}
@@ -395,34 +379,33 @@ function App() {
       <footer className="footer">
         <div className="footer__container">
           <div className="footer__content">
-            {/* Brand Section */}
             <div className="footer__section--brand">
               <h3 className="footer__brand">Justin Adame</h3>
               <p className="footer__description">
                 Frontend Developer passionate about creating beautiful, user-friendly web experiences with modern technologies.
               </p>
               <div className="footer__social">
-                <a 
-                  href="https://linkedin.com/in/justin-adame" 
-                  className="footer__social-link" 
+                <a
+                  href="https://linkedin.com/in/justin-adame"
+                  className="footer__social-link"
                   aria-label="LinkedIn"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   <FontAwesomeIcon icon={faLinkedin} />
                 </a>
-                <a 
-                  href="https://github.com/justin-adame" 
-                  className="footer__social-link" 
+                <a
+                  href="https://github.com/justin-adame"
+                  className="footer__social-link"
                   aria-label="GitHub"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   <FontAwesomeIcon icon={faGithubBrand} />
                 </a>
-                <a 
-                  href="https://twitter.com/justin_adame" 
-                  className="footer__social-link" 
+                <a
+                  href="https://twitter.com/justin_adame"
+                  className="footer__social-link"
                   aria-label="Twitter"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -431,8 +414,6 @@ function App() {
                 </a>
               </div>
             </div>
-
-            {/* Quick Links */}
             <div className="footer__section">
               <h4 className="footer__section-title">Quick Links</h4>
               <ul className="footer__links">
@@ -453,13 +434,11 @@ function App() {
                 </li>
               </ul>
             </div>
-
-            {/* Contact Info */}
             <div className="footer__section">
               <h4 className="footer__section-title">Get In Touch</h4>
               <div className="footer__contact">
-                <a 
-                  href="mailto:your.email@example.com" 
+                <a
+                  href="mailto:your.email@example.com"
                   className="footer__contact-item"
                   aria-label="Send email"
                 >
@@ -472,8 +451,6 @@ function App() {
               </div>
             </div>
           </div>
-
-          {/* Bottom Copyright */}
           <div className="footer__bottom">
             <div className="footer__copyright">
               <p>
@@ -483,9 +460,7 @@ function App() {
           </div>
         </div>
       </footer>
-
-      {/* MODAL */}
-      <Modal 
+      <Modal
         isOpen={modalOpen}
         onClose={closeModal}
         loading={modalLoading}
@@ -497,5 +472,6 @@ function App() {
 }
 
 export default App;
+
 
 

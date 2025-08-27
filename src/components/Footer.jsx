@@ -1,7 +1,7 @@
 /* 
- * Footer Component - Three-column layout with brand, quick links, and contact
- * Includes loading states, smooth scrolling, and modal interactions
- * Designed to match the rest of the app's theme system and responsive design
+ * Footer Component - Nice three-column layout that ties everything together
+ * Brand info on left, quick nav in middle, contact stuff on right
+ * Had to make sure the loading skeletons look good while everything loads
  */
 
 import React from 'react';
@@ -11,12 +11,12 @@ import { faFilePdf, faEnvelope, faHeart } from '@fortawesome/free-solid-svg-icon
 import Skeleton from 'react-loading-skeleton';
 
 const Footer = ({ loading, toggleModal }) => {
-  // Dynamic year for copyright - keeps the footer current automatically
+  // Auto-updates the year so I don't have to remember to change it every January
   const currentYear = new Date().getFullYear();
 
   /* 
-   * Smooth scroll to top functionality
-   * Same behavior as the navbar logo - creates consistent UX
+   * Same smooth scroll function as the navbar - keeps things consistent
+   * Nothing worse than jarring page jumps when you click a logo
    */
   const scrollToTop = () => {
     window.scrollTo({ 
@@ -26,18 +26,16 @@ const Footer = ({ loading, toggleModal }) => {
     });
   };
 
-  /* 
-   * Handle brand logo clicks
-   * Prevents default behavior and smoothly scrolls to top
-   */
+  // Make the brand name clickable and scroll to top
   const handleBrandClick = (e) => {
     e.preventDefault();
     scrollToTop();
   };
 
   /* 
-   * Social media and resume links
-   * Centralized data makes it easy to update links or add new ones
+   * All my social links and resume in one place
+   * Easy to update or add new platforms later
+   * TODO: Need to upload actual resume and update that link
    */
   const socialLinks = [
     {
@@ -52,39 +50,39 @@ const Footer = ({ loading, toggleModal }) => {
     },
     {
       name: "Resume",
-      url: "#", // Update this with actual resume link
+      url: "#", // Need to upload resume PDF and put real link here
       icon: faFilePdf
     }
   ];
 
   /* 
-   * Handle navigation from footer quick links
-   * Projects scrolls to section, others open modals
+   * Quick links navigation - Projects scrolls to section, others open modals
+   * Keeps the same interaction patterns as the main nav
    */
   const handleQuickLinkClick = (type) => {
     if (type === 'projects') {
-      // Scroll to projects section instead of opening modal
+      // Scroll to projects instead of opening a modal
       const element = document.getElementById('projects');
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
       }
     } else {
-      // Open modal for about/contact
+      // About and Contact open the modal
       toggleModal(type);
     }
   };
 
   /* 
    * Loading state with skeleton placeholders
-   * Maintains layout structure while content loads
-   * Uses consistent skeleton styling with rest of app
+   * Keeps the layout stable while everything loads up
+   * Made sure the skeleton sizes match the real content
    */
   if (loading) {
     return (
       <footer className="footer">
         <div className="footer__container">
           <div className="footer__content">
-            {/* Brand section skeleton */}
+            {/* Brand section loading state */}
             <div className="footer__section footer__section--brand">
               <Skeleton width="200px" height="32px" />
               <Skeleton count={2} />
@@ -95,7 +93,7 @@ const Footer = ({ loading, toggleModal }) => {
               </div>
             </div>
             
-            {/* Quick links skeleton */}
+            {/* Quick links loading state */}
             <div className="footer__section">
               <Skeleton width="100px" height="20px" className="footer__section-title-skeleton" />
               {[...Array(3)].map((_, index) => (
@@ -103,7 +101,7 @@ const Footer = ({ loading, toggleModal }) => {
               ))}
             </div>
             
-            {/* Contact section skeleton */}
+            {/* Contact section loading state */}
             <div className="footer__section">
               <Skeleton width="120px" height="20px" className="footer__section-title-skeleton" />
               <Skeleton width="200px" height="16px" />
@@ -124,8 +122,8 @@ const Footer = ({ loading, toggleModal }) => {
       <div className="footer__container">
         <div className="footer__content">
           {/* 
-           * Brand Section (Left Column)
-           * Clickable brand name, description, and social links
+           * Left column - Brand stuff and social links
+           * Made the brand name clickable like the navbar logo
            */}
           <div className="footer__section footer__section--brand">
             <button
@@ -140,7 +138,7 @@ const Footer = ({ loading, toggleModal }) => {
               Frontend Developer passionate about creating beautiful, user-friendly web experiences with modern technologies.
             </p>
             
-            {/* Social media links with proper accessibility */}
+            {/* Social media links - opens in new tabs so people don't leave my site */}
             <div className="footer__social">
               {socialLinks.map((link, index) => (
                 <a
@@ -159,8 +157,8 @@ const Footer = ({ loading, toggleModal }) => {
           </div>
 
           {/* 
-           * Quick Links (Center Column)
-           * Navigation shortcuts to main sections
+           * Middle column - Quick navigation
+           * Same functionality as the main nav but in footer form
            */}
           <div className="footer__section">
             <h4 className="footer__section-title">Quick Links</h4>
@@ -196,8 +194,8 @@ const Footer = ({ loading, toggleModal }) => {
           </div>
 
           {/* 
-           * Contact Info (Right Column)
-           * Direct contact access and encouragement text
+           * Right column - Contact info and encouragement
+           * Email opens the contact modal instead of default mail app
            */}
           <div className="footer__section">
             <h4 className="footer__section-title">Get In Touch</h4>
@@ -218,8 +216,8 @@ const Footer = ({ loading, toggleModal }) => {
         </div>
 
         {/* 
-         * Bottom Section
-         * Copyright with animated heart and tech stack mention
+         * Bottom copyright section with animated heart
+         * Auto-updates the year and mentions my tech stack
          */}
         <div className="footer__bottom">
           <div className="footer__copyright">
@@ -236,5 +234,3 @@ const Footer = ({ loading, toggleModal }) => {
 };
 
 export default Footer;
-
-

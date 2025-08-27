@@ -20,9 +20,8 @@ const Projects = ({ loading }) => {
       id: 1,
       title: "Ultraverse NFT Marketplace",
       description: "Built this React NFT marketplace from scratch with dark/light themes and smooth navigation. Pretty happy with how clean it turned out.",
-      image: "/images/ultraverse-screenshot.png", 
-      liveUrl: "https://ultraverse-nft-project.vercel.app/"
-, 
+      image: "/images/ultraverse-screenshot.png",
+      liveUrl: "https://ultraverse-nft-project.vercel.app/", // Finally got this URL working lol
       githubUrl: "https://github.com/jradame/ultraverse-nft-project",
       technologies: ["React", "CSS3", "JavaScript", "React Router", "Vercel"],
       category: "Frontend",
@@ -31,7 +30,7 @@ const Projects = ({ loading }) => {
     },
     {
       id: 2,
-      title: "Dashboard Application", 
+      title: "Dashboard Application",
       description: "Planning an analytics dashboard with charts and real-time data. Want to dive deeper into data visualization.",
       icon: faPalette,
       category: "Frontend",
@@ -42,7 +41,7 @@ const Projects = ({ loading }) => {
       title: "E-Commerce Platform",
       description: "Full-stack online store with payments and user accounts. Going to be a good challenge to learn backend stuff.",
       icon: faRocket,
-      category: "Full-Stack", 
+      category: "Full-Stack",
       status: "COMING SOON"
     }
   ];
@@ -90,17 +89,17 @@ const Projects = ({ loading }) => {
           // Actual project cards with staggered entrance animations
           <div className="projects__cards">
             {projects.map((project, index) => (
-              <ScrollReveal 
-                key={project.id} 
-                direction="up" 
+              <ScrollReveal
+                key={project.id}
+                direction="up"
                 delay={200 + (index * 100)} // Each card comes in 100ms after the last
               >
                 <div className="project-block">
                   <div className="project-image-container">
                     {project.image ? (
                       // Real project screenshot
-                      <img 
-                        src={project.image} 
+                      <img
+                        src={project.image}
                         alt={`${project.title} screenshot`}
                         className="project-image-simple"
                       />
@@ -123,7 +122,7 @@ const Projects = ({ loading }) => {
                     {/* Show buttons only for live projects */}
                     {project.status === 'LIVE' ? (
                       <div className="project-simple-links">
-                        <button 
+                        <button
                           className="project-simple-btn"
                           onClick={() => handleLinkClick(project.liveUrl)}
                           aria-label={`View live ${project.title}`}
@@ -131,7 +130,7 @@ const Projects = ({ loading }) => {
                           <FontAwesomeIcon icon={faExternalLinkAlt} />
                           View Live
                         </button>
-                        <button 
+                        <button
                           className="project-simple-btn project-simple-btn-github"
                           onClick={() => handleLinkClick(project.githubUrl)}
                           aria-label={`View ${project.title} source code`}
@@ -172,6 +171,8 @@ const Projects = ({ loading }) => {
 };
 
 export default Projects;
+
+
 
 
 

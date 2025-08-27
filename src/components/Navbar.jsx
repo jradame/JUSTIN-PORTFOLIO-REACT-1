@@ -1,10 +1,16 @@
+/* 
+ * Navbar Component - Simple sticky header with dark mode toggle
+ * Brand name scrolls to top, nav links either open modals or scroll to sections
+ * Theme toggle switches between light/dark mode with smooth transitions
+ */
+
 import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
 
 const Navbar = ({ loading, isDarkMode, toggleTheme, toggleModal }) => {
-  // Scroll to top function
+  // Same smooth scroll function used throughout the site - consistency is key
   const scrollToTop = () => {
     window.scrollTo({ 
       top: 0, 
@@ -13,12 +19,13 @@ const Navbar = ({ loading, isDarkMode, toggleTheme, toggleModal }) => {
     });
   };
 
-  // Handle brand click
+  // Make the brand name clickable to scroll to top - standard UX pattern
   const handleBrandClick = (e) => {
     e.preventDefault();
     scrollToTop();
   };
 
+  // Smooth scroll to any section by ID - used for Projects link
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -31,6 +38,7 @@ const Navbar = ({ loading, isDarkMode, toggleTheme, toggleModal }) => {
       <div className="nav-container">
         <div className="nav__logo">
           {loading ? (
+            // Loading skeleton for brand name
             <Skeleton width="150px" height="24px" />
           ) : (
             <button
@@ -44,6 +52,7 @@ const Navbar = ({ loading, isDarkMode, toggleTheme, toggleModal }) => {
         </div>
         
         {loading ? (
+          // Skeleton placeholders for nav links while loading
           <div className="nav__links-skeleton">
             <Skeleton width="60px" height="20px" />
             <Skeleton width="70px" height="20px" />
@@ -52,6 +61,7 @@ const Navbar = ({ loading, isDarkMode, toggleTheme, toggleModal }) => {
           </div>
         ) : (
           <ul className="nav__link--list">
+            {/* About and Contact open modals */}
             <li className="nav__link">
               <button 
                 className="nav__link--anchor" 
@@ -60,6 +70,7 @@ const Navbar = ({ loading, isDarkMode, toggleTheme, toggleModal }) => {
                 About
               </button>
             </li>
+            {/* Projects scrolls to section instead of opening modal */}
             <li className="nav__link">
               <button 
                 className="nav__link--anchor"
@@ -76,6 +87,7 @@ const Navbar = ({ loading, isDarkMode, toggleTheme, toggleModal }) => {
                 Contact
               </button>
             </li>
+            {/* Theme toggle - sun for dark mode, moon for light mode */}
             <li className="nav__link">
               <button 
                 className={`nav__link--anchor theme-toggle ${isDarkMode ? 'theme-toggle--dark' : ''}`}
@@ -97,6 +109,7 @@ const Navbar = ({ loading, isDarkMode, toggleTheme, toggleModal }) => {
 };
 
 export default Navbar;
+
 
 
 
