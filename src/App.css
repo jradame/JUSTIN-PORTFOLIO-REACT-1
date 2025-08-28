@@ -1469,6 +1469,50 @@ body:not(.dark-theme) .project-image-simple {
 /* Smooth scrolling for anchor links */
 html { scroll-behavior: smooth; }
 
+/* Paste at the very end of your CSS */
+
+/* Center the brand heading + paragraph in the footer */
+.footer__section--brand {
+  align-items: center !important;
+  text-align: center !important;
+}
+
+.footer__brand {
+  display: block !important;
+  margin: 0 auto !important;
+  text-align: center !important;
+}
+
+.footer__description {
+  max-width: 65ch !important;
+  margin: 0.5rem auto 1.5rem !important;
+  text-align: center !important;
+}
+
+.footer__social {
+  justify-content: center !important;
+}
+
+/* Paste at the very end of your CSS */
+
+/* Center the right footer column: title, button, and blurb */
+.footer__section:last-child { 
+  text-align: center !important; 
+  align-items: center !important; 
+}
+.footer__section:last-child .footer__section-title { 
+  text-align: center !important; 
+}
+.footer__contact { 
+  align-items: center !important; 
+}
+.footer__contact-item { 
+  margin-inline: auto !important; 
+}
+.footer__contact-text { 
+  text-align: center !important; 
+}
+
 
 
 
