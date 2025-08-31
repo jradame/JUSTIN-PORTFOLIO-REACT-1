@@ -3,6 +3,10 @@
  * Added missing import for faCalendarAlt used in project placeholders
  */
 
+/*
+ * App.js - Main React component tying everything together
+ */
+
 import React, { useEffect, useState, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -20,28 +24,19 @@ import Modal from './components/Modal';
 import Footer from './components/Footer';
 
 function App() {
-  // Theme state
   const [isDarkMode, setIsDarkMode] = useState(() => {
     const savedTheme = localStorage.getItem('theme');
     return savedTheme === 'dark';
   });
   const [isTransitioning, setIsTransitioning] = useState(false);
-
-  // Loading state
   const [loading, setLoading] = useState(true);
-
-  // Modal state
   const [modalOpen, setModalOpen] = useState(false);
   const [modalType, setModalType] = useState('about');
   const [modalLoading, setModalLoading] = useState(false);
-
-  // Mobile menu state
   const [menuOpen, setMenuOpen] = useState(false);
 
-  // Refs
   const modalRef = useRef();
 
-  // Theme initialization
   useEffect(() => {
     if (isDarkMode) {
       document.body.classList.add('dark-theme');
@@ -56,7 +51,6 @@ function App() {
     return () => clearTimeout(timer);
   }, [isDarkMode]);
 
-  // Theme toggle function
   const toggleTheme = () => {
     if (isTransitioning) return;
 
@@ -80,7 +74,6 @@ function App() {
     }, 300);
   };
 
-  // Modal functions
   const openModal = (type) => {
     setModalType(type);
     setModalLoading(true);
@@ -97,28 +90,28 @@ function App() {
     setModalLoading(false);
   };
 
-  // Mobile menu helpers
   const closeMenu = () => setMenuOpen(false);
   const toggleMenu = () => setMenuOpen(!menuOpen);
 
-  // Scroll to projects section
   const scrollToProjects = () => {
     document.querySelector('.projects').scrollIntoView({ behavior: 'smooth' });
     if (menuOpen) setMenuOpen(false);
   };
 
-  // Projects array
+  // ==============================
+  // PROJECTS
+  // ==============================
   const projects = [
     {
       icon: faGem,
-      title: "Ultraverse NFT Marketplace",
+      title: "CineScope 🎬",
       category: "Frontend Development",
-      description: "Built this React NFT marketplace from scratch with dark/light themes and smooth navigation. Pretty happy with how clean it turned out.",
+      description: "Search movies, TV shows, and games using the OMDb API. Features modals, skeleton loaders, and smooth UI interactions.",
       status: "COMPLETED",
-      imageUrl: "/images/NFT-LANDING-PAGE.png",
-      githubUrl: "https://github.com/jradame/ultraverse-nft-project",
-      liveUrl: "https://ultraverse-nft-project.vercel.app/",
-      technologies: ["React", "CSS3", "JavaScript", "React Router", "Vercel"]
+      imageUrl: "/images/cinescope-preview.png",
+      githubUrl: "https://github.com/jradame/CINESCOPE",
+      liveUrl: "https://cinescope-project.vercel.app",
+      technologies: ["HTML5", "CSS3", "JavaScript", "OMDb API", "Vercel"]
     },
     {
       icon: faGem,
@@ -132,13 +125,14 @@ function App() {
     },
     {
       icon: faGem,
-      title: "E-Commerce Platform",
-      category: "Full Stack",
-      description: "Complete e-commerce solution with user authentication, payment processing, and admin dashboard built with modern technologies.",
-      status: "COMING SOON",
-      githubUrl: "https://github.com/yourusername/ecommerce-project",
-      liveUrl: null,
-      technologies: ["React", "Node.js", "MongoDB"]
+      title: "Ultraverse NFT Marketplace",
+      category: "Frontend Development",
+      description: "React NFT marketplace with dark/light themes and smooth navigation. Built from scratch and deployed on Vercel.",
+      status: "COMPLETED",
+      imageUrl: "/images/NFT-LANDING-PAGE.png",
+      githubUrl: "https://github.com/jradame/ultraverse-nft-project",
+      liveUrl: "https://ultraverse-nft-project.vercel.app/",
+      technologies: ["React", "CSS3", "JavaScript", "React Router", "Vercel"]
     }
   ];
 

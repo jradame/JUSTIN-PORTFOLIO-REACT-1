@@ -419,6 +419,7 @@ body {
 }
 
 /* Project cards with aggressively removed borders - I mean AGGRESSIVELY */
+/* Project cards with aggressively removed borders */
 .project-block {
   background: none !important;
   border: none !important;
@@ -437,64 +438,40 @@ body {
 
 .project-image-container {
   width: 100%;
-  aspect-ratio: 3/4;
+  height: 270px;             /* lock card height */
   display: flex;
   align-items: center;
   justify-content: center;
-  background: none !important;
-  border: none !important;
-  box-shadow: none !important;
-  outline: none !important;
-  position: relative;
+  overflow: hidden;          /* hide overflow */
   margin-bottom: 1.2rem;
-  border-radius: 0 !important;
-  overflow: visible !important;
+  position: relative;
   transition: all 0.3s ease;
 }
 
 .project-image-container:hover {
   transform: translateY(-2px);
-  box-shadow: none !important; /* Still no borders! */
+  box-shadow: none !important;
 }
 
-/* Clean project images with no styling interference */
+/* Make all project images uniform */
 .project-image-simple {
-  max-width: 100%;
-  max-height: 100%;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;       /* show full screenshot without cropping */
   display: block;
-  border-radius: 0 !important;
-  border: none !important;
-  box-shadow: none !important;
-  background: none !important;
-  background-color: transparent !important;
-  object-fit: contain;
   transition: transform 0.3s ease;
-  padding: 0 !important;
-  outline: none !important;
-  margin: 0 !important;
 }
 
 .project-image-simple:hover {
   transform: translateY(-2px);
-  border: none !important; /* NO BORDERS EVER */
-  box-shadow: none !important;
-  outline: none !important;
-}
-
-/* Triple-check that no inherited borders creep in anywhere */
-body:not(.dark-theme) .project-block {
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-}
-
-body:not(.dark-theme) .project-image-container {
-  background: transparent !important;
   border: none !important;
   box-shadow: none !important;
   outline: none !important;
 }
 
+/* Ensure light theme doesn’t override */
+body:not(.dark-theme) .project-block,
+body:not(.dark-theme) .project-image-container,
 body:not(.dark-theme) .project-image-simple {
   background: transparent !important;
   border: none !important;
@@ -566,7 +543,7 @@ body:not(.dark-theme) .project-image-simple {
   box-shadow: 0 4px 16px rgba(6, 182, 212, 0.3);
 }
 
-/* GitHub button gets special dark styling - looks more professional */
+/* GitHub button */
 .project-simple-btn-github { 
   background: #393e4c;
   box-shadow: 0 2px 8px rgba(57, 62, 76, 0.2);
@@ -608,6 +585,7 @@ body:not(.dark-theme) .project-image-simple {
 .dark-theme .project-simple-tag:hover {
   background: rgba(34, 211, 238, 0.2);
 }
+
 
 /* ==========================================================================
    MODAL SYSTEM - Split screen design with slide animations
