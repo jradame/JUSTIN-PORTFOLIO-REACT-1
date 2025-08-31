@@ -1,37 +1,22 @@
-/*
- * Modal Component - My custom split-screen modal for about/contact stuff  
- * Left side slides in from left, right side slides in from right
- * Had to get the animations just right - took a few tries but looks smooth now
- */
-
 import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { faHtml5, faCss3Alt, faJs, faReact, faFigma } from '@fortawesome/free-brands-svg-icons';
 
 const Modal = ({ isOpen, onClose, loading, modalType }) => {
-  // These handle the smooth open/close animations - don't want jarring popups
   const [isVisible, setIsVisible] = useState(false);
   const [shouldRender, setShouldRender] = useState(false);
 
-  /*
-   * Animation timing is tricky - need to mount component first, then trigger CSS animations
-   * The delays here make everything slide in smoothly instead of just appearing
-   */
   useEffect(() => {
     if (isOpen) {
-      setShouldRender(true); // Add to DOM first
-      setTimeout(() => setIsVisible(true), 50); // Then start the slide-in animation
+      setShouldRender(true);
+      setTimeout(() => setIsVisible(true), 50);
     } else {
-      setIsVisible(false); // Start closing animation
-      setTimeout(() => setShouldRender(false), 600); // Remove from DOM after animation finishes
+      setIsVisible(false);
+      setTimeout(() => setShouldRender(false), 600);
     }
   }, [isOpen]);
 
-  /*
-   * Contact form state - keeping track of what user types
-   * Also handles the fake form submission with loading states
-   */
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -40,22 +25,13 @@ const Modal = ({ isOpen, onClose, loading, modalType }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  /*
-   * Fake form submission - just simulates sending an email for now
-   * Shows loading spinner, then success message, then auto-closes
-   * TODO: Hook this up to actual email service later
-   */
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Fake API call - replace with real form submission when ready
     await new Promise(resolve => setTimeout(resolve, 2000));
-    
     setIsSubmitting(false);
     setIsSubmitted(true);
-    
-    // Show success message then close modal and reset form
+
     setTimeout(() => {
       setIsSubmitted(false);
       setFormData({ name: '', email: '', message: '' });
@@ -63,7 +39,6 @@ const Modal = ({ isOpen, onClose, loading, modalType }) => {
     }, 3000);
   };
 
-  // Update form data as user types
   const handleInputChange = (e) => {
     setFormData(prev => ({
       ...prev,
@@ -71,7 +46,6 @@ const Modal = ({ isOpen, onClose, loading, modalType }) => {
     }));
   };
 
-  // Don't render anything if modal isn't supposed to be visible
   if (!shouldRender) return null;
 
   return (
@@ -81,21 +55,16 @@ const Modal = ({ isOpen, onClose, loading, modalType }) => {
     >
       <div 
         className={`modal ${isVisible ? 'open' : 'close'}`} 
-        onClick={(e) => e.stopPropagation()} // Don't close when clicking inside the modal
+        onClick={(e) => e.stopPropagation()}
       >
-        {/* X button in top right corner */}
+        {/* Close button */}
         <button className="modal__exit" onClick={onClose}>
           <FontAwesomeIcon icon={faTimes} />
         </button>
         
-        {/* 
-         * LEFT SIDE - Changes based on what type of modal we're showing
-         * About modal = personal stuff and tech stack icons
-         * Contact modal = sales pitch about custom work
-         */}
+        {/* LEFT SIDE */}
         <div className={`modal__half modal__left ${isVisible ? 'slide-in' : 'slide-out'}`}>
           {modalType === 'about' ? (
-            // ABOUT MODAL - All my personal info and skills
             <div className="modal__about">
               <div className="about-content--balanced">
                 <div className="about-content__header">
@@ -116,7 +85,6 @@ const Modal = ({ isOpen, onClose, loading, modalType }) => {
                   </p>
                 </div>
 
-                {/* Tech stack with hover effects - looks pretty cool */}
                 <div className="about-content__footer">
                   <div className="modal__languages">
                     <div className="tech-icon html-icon">
@@ -144,7 +112,6 @@ const Modal = ({ isOpen, onClose, loading, modalType }) => {
               </div>
             </div>
           ) : (
-            // CONTACT MODAL - Sales pitch for custom work
             <div className="modal__contact-info">
               <div className="contact-info-content">
                 <div className="contact-info__header">
@@ -172,10 +139,7 @@ const Modal = ({ isOpen, onClose, loading, modalType }) => {
           )}
         </div>
         
-        {/* 
-         * RIGHT SIDE - Contact form is always here regardless of modal type
-         * Handles form validation, submission states, and success messages
-         */}
+        {/* RIGHT SIDE */}
         <div className={`modal__half modal__right ${isVisible ? 'slide-in' : 'slide-out'}`}>
           <div className="modal__contact">
             <div className="contact-form-content">
@@ -186,16 +150,13 @@ const Modal = ({ isOpen, onClose, loading, modalType }) => {
                 </h2>
               </div>
 
-              {/* Show either success message or the actual form */}
               {isSubmitted ? (
-                // Success state - shows checkmark and auto-closes after 3 seconds
                 <div className="form__success">
                   <div className="success-icon">✓</div>
                   <h4>Message Sent!</h4>
                   <p>Thanks for reaching out. I'll get back to you soon!</p>
                 </div>
               ) : (
-                // The actual contact form with validation
                 <form className="form" onSubmit={handleSubmit}>
                   <div className="form__item">
                     <label className="form__item--label">Name</label>
@@ -236,7 +197,6 @@ const Modal = ({ isOpen, onClose, loading, modalType }) => {
                     />
                   </div>
                   
-                  {/* Submit button changes text when loading */}
                   <button 
                     className={`form__submit ${isSubmitting ? 'form__submit--loading' : ''}`}
                     type="submit"
@@ -255,6 +215,7 @@ const Modal = ({ isOpen, onClose, loading, modalType }) => {
 };
 
 export default Modal;
+
 
 
 

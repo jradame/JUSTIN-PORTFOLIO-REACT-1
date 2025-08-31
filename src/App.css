@@ -417,7 +417,6 @@ body {
   margin: 0 auto;
   flex-wrap: wrap;
 }
-
 /* Project cards with aggressively removed borders - I mean AGGRESSIVELY */
 /* Project cards with aggressively removed borders */
 .project-block {
@@ -611,18 +610,18 @@ body:not(.dark-theme) .project-image-simple {
 .modal-overlay.open { opacity: 1; }
 
 .modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.7);   /* dimmed background */
   display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;                 /* breathing space around modal */
-  z-index: 1000;
-  overflow-y: auto;              /* allow full-page scroll if needed */
+  flex-direction: row;
+  width: 85%;
+  max-width: 1000px;
+  height: 650px;
+  border-radius: 20px;
+  position: relative;
+  opacity: 0;
+  transform: scale(0.9);
+  transition: all 0.4s ease;
+  background: transparent;
+  overflow: hidden; /* updated */
 }
 
 .modal.open {
@@ -632,7 +631,6 @@ body:not(.dark-theme) .project-image-simple {
 }
 
 .dark-theme .modal.open { box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6); }
-
 /* Split modal design - left side slides from left, right from right */
 .modal__half {
   width: 50%;
@@ -642,7 +640,7 @@ body:not(.dark-theme) .project-image-simple {
   flex-direction: column;
   position: relative;
   transition: transform 0.5s ease, opacity 0.4s ease;
-  overflow: hidden;
+  overflow-y: auto; /* scroll fix for smaller screens */
 }
 
 .modal__left {
@@ -667,7 +665,7 @@ body:not(.dark-theme) .project-image-simple {
 
 .dark-theme .modal__right { background: var(--bg-secondary); }
 
-/* Slide-in animations for modal halves - timing had to be perfect */
+/* Slide-in animations for modal halves */
 .modal__left.slide-in, .modal__right.slide-in {
   transform: translateX(0);
   opacity: 1;
@@ -708,7 +706,7 @@ body:not(.dark-theme) .project-image-simple {
   text-align: center;
 }
 
-/* Tech stack icons in modal - each one has hover animations */
+/* Tech stack icons in modal */
 .modal__languages {
   display: flex;
   flex-wrap: wrap;
@@ -749,7 +747,7 @@ body:not(.dark-theme) .project-image-simple {
 
 .tech-icon:hover .tech-name { opacity: 1; }
 
-/* Individual tech icon colors - React spins because why not */
+/* Individual tech icon colors */
 .html-icon svg { color: #e44d26; }
 .css-icon svg { color: #1572b6; }
 .js-icon svg { color: #f0db4f; }
@@ -806,7 +804,7 @@ body:not(.dark-theme) .project-image-simple {
   margin-bottom: 1.5rem;
 }
 
-/* Modal close button - simple but effective */
+/* Modal close button */
 .modal__exit {
   position: absolute;
   top: 15px;
@@ -824,7 +822,7 @@ body:not(.dark-theme) .project-image-simple {
   transform: scale(1.1);
 }
 
-/* Contact form styling - clean inputs with focus states */
+/* Contact form styling */
 .form {
   display: flex;
   flex-direction: column;
@@ -872,7 +870,7 @@ body:not(.dark-theme) .project-image-simple {
 
 .input::placeholder { color: var(--text-muted); opacity: 0.7; }
 
-/* Submit button with loading states - shows spinner when sending */
+/* Submit button with loading states */
 .form__submit {
   background: linear-gradient(135deg, var(--primary), var(--accent));
   color: white;
@@ -899,7 +897,7 @@ body:not(.dark-theme) .project-image-simple {
 
 .form__submit:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
 
-/* Loading spinner for form submission */
+/* Loading spinner */
 .form__submit--loading::after {
   content: '';
   position: absolute;
@@ -919,7 +917,7 @@ body:not(.dark-theme) .project-image-simple {
   100% { transform: rotate(360deg); }
 }
 
-/* Success state after form submission - checkmark animation looks nice */
+/* Success state */
 .form__success {
   text-align: center;
   padding: 1.5rem 0.5rem;
@@ -984,7 +982,6 @@ body:not(.dark-theme) .project-image-simple {
   margin-bottom: 3rem;
   align-items: flex-start;
 }
-
 /* Left section - brand and social links */
 .footer__section--brand {
   max-width: none;
@@ -1061,7 +1058,7 @@ body:not(.dark-theme) .project-image-simple {
   box-shadow: 0 8px 20px rgba(34, 211, 238, 0.3);
 }
 
-/* Middle section - centered navigation links */
+/* Middle section */
 .footer__section {
   text-align: center;
   display: flex;
@@ -1110,7 +1107,7 @@ body:not(.dark-theme) .project-image-simple {
   outline-offset: 2px;
 }
 
-/* Right section - contact info */
+/* Right section */
 .footer__section:last-child {
   text-align: right;
   display: flex;
@@ -1172,7 +1169,7 @@ body:not(.dark-theme) .project-image-simple {
   text-align: right;
 }
 
-/* Bottom copyright section with animated heart */
+/* Bottom copyright */
 .footer__bottom {
   padding-top: 2rem;
   border-top: 1px solid var(--border-color);
@@ -1203,13 +1200,12 @@ body:not(.dark-theme) .project-image-simple {
 }
 
 /* ==========================================================================
-   RESPONSIVE DESIGN - Mobile first, had to test on tons of devices
+   RESPONSIVE DESIGN
    ========================================================================== */
 
 @media (max-width: 768px) {
-  /* Mobile navigation - hamburger menu slides in from right */
   .hamburger { display: flex; }
-  
+
   .nav__link--list {
     position: fixed;
     top: 80px;
@@ -1226,23 +1222,14 @@ body:not(.dark-theme) .project-image-simple {
     z-index: 999;
     min-width: 200px;
   }
-  
-  .dark-theme .nav__link--list {
-    background: var(--bg-secondary);
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
-  }
-  
-  .nav__link--list.open {
-    display: flex;
-    animation: slideIn 0.3s ease;
-  }
-  
+
+  .nav__link--list.open { display: flex; animation: slideIn 0.3s ease; }
+
   @keyframes slideIn {
     from { opacity: 0; transform: translateY(-20px) scale(0.95); }
     to { opacity: 1; transform: translateY(0) scale(1); }
   }
-  
-  /* Overlay when mobile menu is open */
+
   .menu-overlay {
     position: fixed;
     top: 0;
@@ -1252,245 +1239,56 @@ body:not(.dark-theme) .project-image-simple {
     background: rgba(0, 0, 0, 0.3);
     z-index: 998;
   }
-  
-  /* Mobile hero adjustments - stack everything vertically */
-  .hero-content {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-    text-align: center;
-  }
-  
-  .hero-headshot {
-    width: 200px;
-    height: 200px;
-    order: -1; /* Image goes to top on mobile */
-  }
-  
+
+  .hero-content { grid-template-columns: 1fr; gap: 2rem; text-align: center; }
+  .hero-headshot { width: 200px; height: 200px; order: -1; }
   .hero-title { font-size: 2.5rem; }
   .hero-subtitle { font-size: 1.1rem; }
-  
-  .hero-buttons {
-    flex-direction: column;
-    gap: 1rem;
-    align-items: center;
-  }
-  
+  .hero-buttons { flex-direction: column; gap: 1rem; align-items: center; }
   .btn { width: 100%; max-width: 280px; }
-  
-  .social-link { width: 50px; height: 50px; font-size: 1.2rem; }
-  
-  /* Mobile projects section - single column layout */
+
   .projects { padding: 80px 1rem 60px; }
-  .section__title { font-size: 2rem; margin-bottom: 3rem; }
-  
-  .projects__cards { 
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .project-block {
-    max-width: 100%;
-    min-width: auto;
-  }
-  
-  .project-image-container {
-    aspect-ratio: 4/5; /* Taller on mobile */
-  }
-  
-  .project-simple-links {
-    flex-direction: column;
-    gap: 0.7rem;
-  }
-  
-  .project-simple-btn {
-    width: 100%;
-    max-width: 200px;
-  }
-  
-  /* Mobile modal adjustments - stack vertically instead of side by side */
-  .modal {
-    flex-direction: column;
-    width: 95vw;
-    height: 90vh;
-  }
-  
-  .modal__half { width: 100%; height: 50%; padding: 1.5rem; }
-  
-  .modal__left {
-    transform: translateY(-100%); /* Slide from top instead of left */
-    border-radius: 20px 20px 0 0;
-    margin-right: 0;
-    margin-bottom: -1px;
-  }
-  
-  .modal__right {
-    transform: translateY(100%); /* Slide from bottom instead of right */
-    border-radius: 0 0 20px 20px;
-    margin-left: 0;
-    margin-top: -1px;
-  }
-  
+  .projects__cards { flex-direction: column; align-items: center; }
+  .project-block { max-width: 100%; }
+
+  /* Modal stacks vertically */
+  .modal { flex-direction: column; width: 95vw; height: 90vh; }
+  .modal__half { width: 100%; height: 50%; padding: 1.5rem; overflow-y: auto; }
+  .modal__left { transform: translateY(-100%); border-radius: 20px 20px 0 0; }
+  .modal__right { transform: translateY(100%); border-radius: 0 0 20px 20px; }
   .modal__left.slide-in, .modal__right.slide-in { transform: translateY(0); }
   .modal__left.slide-out { transform: translateY(-100%); }
   .modal__right.slide-out { transform: translateY(100%); }
-  
-  .tech-icon { width: 50px; height: 50px; }
-  .tech-icon svg { font-size: 1.5rem; }
-  
-  /* Mobile footer - everything centered in single column */
-  .footer__content {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-    text-align: center;
-  }
-  
-  .footer__section--brand {
-    text-align: center;
-    align-items: center;
-  }
-  
-  .footer__description {
-    text-align: center;
-  }
-  
-  .footer__social {
-    justify-content: center;
-  }
-  
-  .footer__section {
-    text-align: center;
-    align-items: center;
-  }
-  
-  .footer__section:last-child {
-    text-align: center;
-    align-items: center;
-  }
-  
-  .footer__section:last-child .footer__section-title {
-    text-align: center;
-  }
-  
-  .footer__contact {
-    align-items: center;
-  }
-  
-  .footer__contact-text {
-    text-align: center;
-  }
+
+  .footer__content { grid-template-columns: 1fr; text-align: center; gap: 2rem; }
+  .footer__section--brand, .footer__section, .footer__section:last-child { align-items: center; text-align: center; }
 }
 
-/* Extra small mobile devices - really tiny screens */
 @media (max-width: 480px) {
-  .nav__link--list { right: 10px; padding: 1rem; min-width: 180px; }
   .hero-headshot { width: 150px; height: 150px; }
   .hero-title { font-size: 2rem; }
-  .hero-subtitle { font-size: 1rem; }
   .section__title { font-size: 1.8rem; }
-  
-  .project-simple-title { font-size: 1.1rem; }
-  .project-simple-desc { font-size: 0.85rem; }
-  
+
   .modal { width: 98vw; height: 95vh; }
-  .tech-icon { width: 45px; height: 45px; }
-  
-  .footer {
-    padding: 2.5rem 0.5rem 2rem;
-  }
-  
-  .footer__content {
-    gap: 1.5rem;
-  }
-  
-  .footer__brand {
-    font-size: 1.5rem;
-  }
-  
-  .footer__description {
-    font-size: 0.9rem;
-    line-height: 1.5;
-  }
-  
-  .footer__social-link {
-    width: 36px;
-    height: 36px;
-    font-size: 0.9rem;
-  }
-  
-  .footer__contact-item {
-    padding: 0.7rem;
-    font-size: 0.85rem;
-  }
-  
-  .footer__copyright p {
-    flex-direction: column;
-    gap: 0.5rem;
-    font-size: 0.8rem;
-  }
+  .modal__half { height: auto; max-height: 50%; overflow-y: auto; }
+
+  .footer { padding: 2.5rem 0.5rem 2rem; }
+  .footer__brand { font-size: 1.5rem; }
+  .footer__social-link { width: 36px; height: 36px; }
 }
 
-/* Accessibility - respect user's motion preferences */
+/* Accessibility */
 @media (prefers-reduced-motion: reduce) {
-  * {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
+  * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
   .wave { animation: none; }
 }
 
-/* Custom scrollbar styling - subtle but nice touch */
+/* Custom scrollbar */
 ::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: var(--bg-secondary); }
 ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
 
-/* Smooth scrolling for anchor links */
+/* Smooth scrolling */
 html { scroll-behavior: smooth; }
-
-/* Paste at the very end of your CSS */
-
-/* Center the brand heading + paragraph in the footer */
-.footer__section--brand {
-  align-items: center !important;
-  text-align: center !important;
-}
-
-.footer__brand {
-  display: block !important;
-  margin: 0 auto !important;
-  text-align: center !important;
-}
-
-.footer__description {
-  max-width: 65ch !important;
-  margin: 0.5rem auto 1.5rem !important;
-  text-align: center !important;
-}
-
-.footer__social {
-  justify-content: center !important;
-}
-
-/* Paste at the very end of your CSS */
-
-/* Center the right footer column: title, button, and blurb */
-.footer__section:last-child { 
-  text-align: center !important; 
-  align-items: center !important; 
-}
-.footer__section:last-child .footer__section-title { 
-  text-align: center !important; 
-}
-.footer__contact { 
-  align-items: center !important; 
-}
-.footer__contact-item { 
-  margin-inline: auto !important; 
-}
-.footer__contact-text { 
-  text-align: center !important; 
-}
 
 
 
