@@ -20,7 +20,7 @@ const Projects = ({ loading }) => {
       "Search movies, TV shows, and games using the OMDb API. Features modals, skeleton loaders, and smooth UI interactions.",
     image: "/images/cinescope-preview.png",
     liveUrl: "https://cinescope-project.vercel.app", // ✅ Live demo
-    githubUrl: "https://github.com/jradame/CINESCOPE", // ✅ GitHub repo
+    githubUrl: "https://github.com/jradame/CINESCOPE-PROJECT", // ✅ GitHub repo
     technologies: ["HTML5", "CSS3", "JavaScript", "OMDb API", "Vercel"],
     category: "Frontend",
     status: "LIVE",
