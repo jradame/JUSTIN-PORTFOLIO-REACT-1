@@ -19,8 +19,8 @@ const Projects = ({ loading }) => {
     description:
       "Search movies, TV shows, and games using the OMDb API. Features modals, skeleton loaders, and smooth UI interactions.",
     image: "/images/cinescope-preview.png",
-    liveUrl: "https://cinescope-project.vercel.app",
-    githubUrl: "https://github.com/jradame/CINESCOPE", // ✅ FIXED
+    liveUrl: "https://cinescope-project.vercel.app", // ✅ Live demo
+    githubUrl: "https://github.com/jradame/CINESCOPE", // ✅ GitHub repo
     technologies: ["HTML5", "CSS3", "JavaScript", "OMDb API", "Vercel"],
     category: "Frontend",
     status: "LIVE",
@@ -32,9 +32,9 @@ const Projects = ({ loading }) => {
     description:
       "A responsive React web app that simulates an online bookstore. Users can browse, filter, sort by price or rating, and see which books are on sale.",
     image: "/images/library-screenshot.png",
-    liveUrl: "https://libraryproject.vercel.app",
-    githubUrl: "https://github.com/jradame/LIBRARYPROJECT",
-    technologies: ["React", "CSS3", "JavaScript", "React Router", "Vercel"],
+    liveUrl: "https://libraryproject.vercel.app", // ✅ Live demo
+    githubUrl: "https://github.com/jradame/LIBRARYPROJECT", // ✅ GitHub repo
+    technologies: ["React", "CSS3", "JavaScript", "Vercel"],
     category: "Frontend",
     status: "LIVE",
     featured: true,
@@ -45,8 +45,8 @@ const Projects = ({ loading }) => {
     description:
       "React NFT marketplace with dark/light themes and smooth navigation. Built from scratch and deployed on Vercel.",
     image: "/images/ultraverse-screenshot.png",
-    liveUrl: "https://ultraverse-nft-project.vercel.app/",
-    githubUrl: "https://github.com/jradame/ultraverse-nft-project",
+    liveUrl: "https://ultraverse-nft-project.vercel.app/", // ✅ Live demo
+    githubUrl: "https://github.com/jradame/ultraverse-nft-project", // ✅ GitHub repo
     technologies: ["React", "CSS3", "JavaScript", "React Router", "Vercel"],
     category: "Frontend",
     status: "LIVE",
