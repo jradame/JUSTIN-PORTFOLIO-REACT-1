@@ -35,17 +35,17 @@
 
 /* Dark mode just overrides the same variable names - clever right? */
 .dark-theme {
-  --bg-primary: #000000;
-  --bg-secondary: #1e293b;
-  --bg-tertiary: #334155;
-  --text-primary: #ffffff;
-  --text-secondary: #e2e8f0;
-  --text-muted: #94a3b8;
-  --border-color: #475569;
+  --bg-primary: #0f172a;        
+  --bg-secondary: #1e293b;      
+  --bg-tertiary: #334155;       
+  --text-primary: #f8fafc;      
+  --text-secondary: #cbd5e1;    
+  --text-muted: #94a3b8;        
+  --border-color: #475569;      
   --shadow-light: rgba(0, 0, 0, 0.5);
   --shadow-medium: rgba(0, 0, 0, 0.7);
-  --primary: #3b82f6;
-  --accent: #22d3ee;
+  --primary: #3b82f6;           
+  --accent: #22d3ee;            
 }
 
 /* Smooth transitions on everything - makes interactions feel polished */
@@ -334,22 +334,9 @@ body {
   box-shadow: 0 15px 35px rgba(255, 255, 255, 0.3);
 }
 
-/* Waving hand animation - had to get the timing just right */
-.wave {
-  display: inline-block;
-  animation: wave-animation 2.5s ease-in-out infinite;
-  transform-origin: 70% 70%;
-}
 
-@keyframes wave-animation {
-  0% { transform: rotate(0deg); }
-  10% { transform: rotate(14deg); }
-  20% { transform: rotate(-8deg); }
-  30% { transform: rotate(14deg); }
-  40% { transform: rotate(-4deg); }
-  50% { transform: rotate(10deg); }
-  60%, 100% { transform: rotate(0deg); }
-}
+
+
 
 /* ==========================================================================
    PROJECTS SECTION - Clean design, no borders anywhere
