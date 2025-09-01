@@ -15,36 +15,43 @@ const Projects = ({ loading }) => {
    * My project data - real NFT marketplace I built, plus some coming soon ones
    * The Ultraverse project is live and working, others are in planning
    */
-  const projects = [
+    const projects = [
     {
       id: 1,
+      title: "CineScope",
+      description: "Search movies, TV shows, and games using the OMDb API. Features modals, skeleton loaders, and smooth UI interactions.",
+      image: "/images/cinescope-preview.png", // save screenshot here
+      liveUrl: "https://cinescope-project.vercel.app/",
+      githubUrl: "https://github.com/jradame/CINESCOPE",
+      technologies: ["HTML5", "CSS3", "JavaScript", "OMDb API", "Vercel"],
+      category: "Frontend",
+      status: "LIVE"
+    },
+    {
+      id: 2,
+      title: "Library Project",
+      description: "A responsive React web app simulating an online bookstore. Users can browse books, view ratings, filter/sort by price or rating, and check discounts. Built with reusable components and clean state management.",
+      image: "/images/library-screenshot.png", // save screenshot here
+      liveUrl: "https://libraryproject.vercel.app/",
+      githubUrl: "https://github.com/jradame/LIBRARYPROJECT",
+      technologies: ["React", "CSS3", "JavaScript", "React Router", "Vercel"],
+      category: "Frontend",
+      status: "LIVE"
+    },
+    {
+      id: 3,
       title: "Ultraverse NFT Marketplace",
       description: "Built this React NFT marketplace from scratch with dark/light themes and smooth navigation. Pretty happy with how clean it turned out.",
       image: "/images/ultraverse-screenshot.png",
-      liveUrl: "https://ultraverse-nft-project.vercel.app/", // Finally got this URL working lol
+      liveUrl: "https://ultraverse-nft-project.vercel.app/",
       githubUrl: "https://github.com/jradame/ultraverse-nft-project",
       technologies: ["React", "CSS3", "JavaScript", "React Router", "Vercel"],
       category: "Frontend",
       status: "LIVE",
       featured: true
-    },
-    {
-      id: 2,
-      title: "Dashboard Application",
-      description: "Planning an analytics dashboard with charts and real-time data. Want to dive deeper into data visualization.",
-      icon: faPalette,
-      category: "Frontend",
-      status: "COMING SOON"
-    },
-    {
-      id: 3,
-      title: "E-Commerce Platform",
-      description: "Full-stack online store with payments and user accounts. Going to be a good challenge to learn backend stuff.",
-      icon: faRocket,
-      category: "Full-Stack",
-      status: "COMING SOON"
     }
   ];
+
 
   // Open links in new tab - don't want people leaving my portfolio
   const handleLinkClick = (url) => {
