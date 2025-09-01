@@ -409,16 +409,13 @@ body {
 }
 
 .projects__cards {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
   gap: 2rem;
-  justify-content: center;
-  align-items: flex-start;
-  max-width: 1200px;
-  margin: 0 auto;
-  flex-wrap: wrap;
+  align-items: stretch;
 }
-/* Project cards with aggressively removed borders - I mean AGGRESSIVELY */
-/* Project cards with aggressively removed borders */
+
+/* Project card container */
 .project-block {
   background: none !important;
   border: none !important;
@@ -435,59 +432,43 @@ body {
   width: 100%;
 }
 
+/* Image wrapper */
 .project-image-container {
   width: 100%;
-  height: 270px;             /* lock card height */
+  height: 270px;             /* consistent height for all cards */
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;          /* hide overflow */
+  overflow: hidden;
   margin-bottom: 1.2rem;
   position: relative;
-  transition: all 0.3s ease;
+  border-radius: 12px;
+  background: #f8f9fa;       /* subtle light background */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .project-image-container:hover {
-  transform: translateY(-2px);
-  box-shadow: none !important;
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
 }
 
-/* Make all project images uniform */
+/* Actual project image */
+/* Show the full screenshot (no cropping) */
 .project-image-simple {
   width: 100%;
   height: 100%;
-  object-fit: contain;       /* show full screenshot without cropping */
+  object-fit: contain;       /* ✅ keeps entire screenshot visible */
   display: block;
   transition: transform 0.3s ease;
+  background: #fff;          /* white backdrop behind smaller images */
+  padding: 0.5rem;           /* optional: adds a frame around */
 }
 
 .project-image-simple:hover {
-  transform: translateY(-2px);
-  border: none !important;
-  box-shadow: none !important;
-  outline: none !important;
+  transform: scale(1.02);
 }
 
-/* Ensure light theme doesn’t override */
-body:not(.dark-theme) .project-block,
-body:not(.dark-theme) .project-image-container,
-body:not(.dark-theme) .project-image-simple {
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-  outline: none !important;
-}
-
-/* Nuclear option - remove borders from everything in projects section */
-.projects * {
-  border: none !important;
-}
-
-.projects .project-block * {
-  border: none !important;
-  outline: none !important;
-}
-
+/* Project text/info */
 .project-simple-info {
   text-align: center;
   width: 100%;
@@ -498,20 +479,21 @@ body:not(.dark-theme) .project-image-simple {
 }
 
 .project-simple-title {
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   font-weight: 700;
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.5rem;
   color: var(--text-primary);
   line-height: 1.3;
 }
 
 .project-simple-desc {
   margin-bottom: 1.2rem;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   color: var(--text-secondary);
-  line-height: 1.4;
+  line-height: 1.5;
 }
 
+/* Buttons row */
 .project-simple-links {
   margin-bottom: 1.2rem;
   display: flex;
@@ -528,7 +510,7 @@ body:not(.dark-theme) .project-image-simple {
   border: none;
   border-radius: 8px;
   padding: 0.6rem 1.2rem;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   font-weight: 600;
   text-decoration: none;
   transition: all 0.3s ease;
@@ -553,10 +535,11 @@ body:not(.dark-theme) .project-image-simple {
   box-shadow: 0 4px 16px rgba(21, 24, 30, 0.3);
 }
 
+/* Tech tags */
 .project-simple-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.4rem;
+  gap: 0.5rem;
   justify-content: center;
 }
 
@@ -564,15 +547,14 @@ body:not(.dark-theme) .project-image-simple {
   background: rgba(59, 130, 246, 0.1);
   color: var(--primary);
   border-radius: 6px;
-  font-size: 0.7rem;
-  padding: 0.3rem 0.6rem;
+  font-size: 0.75rem;
+  padding: 0.35rem 0.7rem;
   font-weight: 600;
-  display: inline-block;
   transition: all 0.2s ease;
 }
 
 .project-simple-tag:hover {
-  background: rgba(59, 130, 246, 0.15);
+  background: rgba(59, 130, 246, 0.2);
   transform: translateY(-1px);
 }
 
@@ -582,11 +564,10 @@ body:not(.dark-theme) .project-image-simple {
 }
 
 .dark-theme .project-simple-tag:hover {
-  background: rgba(34, 211, 238, 0.2);
+  background: rgba(34, 211, 238, 0.25);
 }
 
-
-/* ==========================================================================
+==========================================================================
    MODAL SYSTEM - Split screen design with slide animations
    ========================================================================== */
 
@@ -1289,6 +1270,7 @@ body:not(.dark-theme) .project-image-simple {
 
 /* Smooth scrolling */
 html { scroll-behavior: smooth; }
+
 
 
 
