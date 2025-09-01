@@ -7,13 +7,16 @@
  * App.js - Main React component tying everything together
  */
 
+/*
+ * App.js - Main React component tying everything together
+ */
+
 import React, { useEffect, useState, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faSun,
   faMoon,
   faExternalLinkAlt,
-  faGem,
   faCalendarAlt
 } from '@fortawesome/free-solid-svg-icons';
 import { faLinkedin as faLinkedinBrand, faGithub as faGithubBrand, faTwitter } from '@fortawesome/free-brands-svg-icons';
@@ -22,6 +25,7 @@ import 'react-loading-skeleton/dist/skeleton.css';
 import './App.css';
 import Modal from './components/Modal';
 import Footer from './components/Footer';
+import Projects from './components/Projects';   // ✅ Use Projects component for project data
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(() => {
@@ -97,50 +101,6 @@ function App() {
     document.querySelector('.projects').scrollIntoView({ behavior: 'smooth' });
     if (menuOpen) setMenuOpen(false);
   };
-
-  // ==============================
-  // PROJECTS
-  // ==============================
-  const projects = [
-  {
-    icon: faGem,
-    title: "CineScope 🎬",
-    category: "Frontend Development",
-    description:
-      "Search movies, TV shows, and games using the OMDb API. Features modals, skeleton loaders, and smooth UI interactions.",
-    status: "COMPLETED",
-    imageUrl: "/images/cinescope-preview.png",
-    githubUrl: "https://github.com/jradame/CINESCOPE-PROJECT",
-
-
-    liveUrl: "https://cinescope-project.vercel.app",
-    technologies: ["HTML5", "CSS3", "JavaScript", "OMDb API", "Vercel"],
-  },
-  {
-    icon: faGem,
-    title: "Library Project 📚",
-    category: "Frontend Development",
-    description:
-      "A responsive React web app that simulates an online bookstore. Users can browse, filter, sort by price or rating, and see which books are on sale.",
-    status: "COMPLETED",
-    imageUrl: "/images/library-screenshot.png",
-    githubUrl: "https://github.com/jradame/LIBRARYPROJECT",
-    liveUrl: "https://libraryproject.vercel.app",
-    technologies: ["React", "CSS3", "JavaScript", "React Router", "Vercel"],
-  },
-  {
-    icon: faGem,
-    title: "Ultraverse NFT Marketplace",
-    category: "Frontend Development",
-    description:
-      "React NFT marketplace with dark/light themes and smooth navigation. Built from scratch and deployed on Vercel.",
-    status: "COMPLETED",
-    imageUrl: "/images/ultraverse-screenshot.png",
-    githubUrl: "https://github.com/jradame/ultraverse-nft-project",
-    liveUrl: "https://ultraverse-nft-project.vercel.app/",
-    technologies: ["React", "CSS3", "JavaScript", "React Router", "Vercel"],
-  },
-];
 
   return (
     <div className="App">
@@ -259,7 +219,7 @@ function App() {
                   <a href="https://linkedin.com/in/justin-adame" className="social-link" aria-label="LinkedIn">
                     <FontAwesomeIcon icon={faLinkedinBrand} />
                   </a>
-                  <a href="https://github.com/justin-adame" className="social-link" aria-label="GitHub">
+                  <a href="https://github.com/jradame" className="social-link" aria-label="GitHub">
                     <FontAwesomeIcon icon={faGithubBrand} />
                   </a>
                   <a href="https://twitter.com/justin_adame" className="social-link" aria-label="Twitter">
@@ -273,78 +233,7 @@ function App() {
       </section>
 
       {/* PROJECTS */}
-      <section className="projects">
-        <div className="projects__container">
-          <h2 className="section__title">My <span className="blue">Projects</span></h2>
-          <div className="projects__cards">
-            {loading ? (
-              [...Array(3)].map((_, i) => (
-                <div key={i} className="project-block project-block--loading">
-                  <div className="project-image-container">
-                    <Skeleton height="270px" className="project-image-simple" />
-                  </div>
-                  <div className="project-simple-info">
-                    <Skeleton width="70%" height="20px" />
-                    <Skeleton count={2} />
-                    <div style={{ display: 'flex', gap: '0.8rem', marginTop: '0.6rem' }}>
-                      <Skeleton width="80px" height="28px" />
-                      <Skeleton width="60px" height="28px" />
-                    </div>
-                    <div style={{ display: 'flex', gap: '0.3rem', marginTop: '0.6rem' }}>
-                      <Skeleton width="45px" height="16px" />
-                      <Skeleton width="45px" height="16px" />
-                    </div>
-                  </div>
-                </div>
-              ))
-            ) : (
-              projects.map((project, idx) => (
-                <div key={idx} className="project-block">
-                  <div className="project-image-container">
-                    {project.imageUrl ? (
-                      <img
-                        src={project.imageUrl}
-                        alt={`${project.title} screenshot`}
-                        className="project-image-simple"
-                        onError={e => {
-                          e.target.src = `https://via.placeholder.com/370x270/3b82f6/ffffff?text=${encodeURIComponent(project.title)}`;
-                        }}
-                      />
-                    ) : (
-                      <div className="project-icon-placeholder">
-                        <FontAwesomeIcon icon={project.icon} />
-                        <div className="project-status-overlay">
-                          <FontAwesomeIcon icon={faCalendarAlt} />
-                          <span>{project.status}</span>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                  <div className="project-simple-info">
-                    <h3 className="project-simple-title">{project.title}</h3>
-                    <p className="project-simple-desc">{project.description}</p>
-                    <div className="project-simple-links">
-                      {project.liveUrl && (
-                        <a href={project.liveUrl} className="project-simple-btn" target="_blank" rel="noopener noreferrer">
-                          <FontAwesomeIcon icon={faExternalLinkAlt} /> Live Demo
-                        </a>
-                      )}
-                      <a href={project.githubUrl} className="project-simple-btn project-simple-btn-github" target="_blank" rel="noopener noreferrer">
-                        <FontAwesomeIcon icon={faGithubBrand} /> GitHub
-                      </a>
-                    </div>
-                    <div className="project-simple-tags">
-                      {project.technologies.map((tech, tIdx) => (
-                        <span key={tIdx} className="project-simple-tag">{tech}</span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              ))
-            )}
-          </div>
-        </div>
-      </section>
+      <Projects loading={loading} />   {/* ✅ Projects handled in its own component */}
 
       {/* FOOTER */}
       <Footer loading={loading} toggleModal={openModal} />

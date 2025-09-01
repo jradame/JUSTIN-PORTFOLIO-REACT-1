@@ -9,53 +9,50 @@ import { faCalendarAlt, faExternalLinkAlt } from '@fortawesome/free-solid-svg-ic
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import Skeleton from 'react-loading-skeleton';
 import ScrollReveal from './ScrollReveal';
-import { faGem } from '@fortawesome/free-regular-svg-icons';
 
 const Projects = ({ loading }) => {
   const projects = [
-  {
-    id: 1,
-    title: "CineScope 🎬",
-    description:
-      "Search movies, TV shows, and games using the OMDb API. Features modals, skeleton loaders, and smooth UI interactions.",
-    image: "/images/cinescope-preview.png",
-    liveUrl: "https://cinescope-project.vercel.app", // ✅ Live demo
-    githubUrl: "https://github.com/jradame/CINESCOPE-PROJECT",
+    {
+      id: 1,
+      title: "CineScope 🎬",
+      description:
+        "Search movies, TV shows, and games using the OMDb API. Features modals, skeleton loaders, and smooth UI interactions.",
+      imageUrl: "/images/cinescope-preview.png",   // ✅ FIXED property name
+      liveUrl: "https://cinescope-project.vercel.app",
+      githubUrl: "https://github.com/jradame/CINESCOPE-PROJECT",
+      technologies: ["HTML5", "CSS3", "JavaScript", "OMDb API", "Vercel"],
+      category: "Frontend",
+      status: "LIVE",
+      featured: true,
+    },
+    {
+      id: 2,
+      title: "Library Project 📚",
+      description:
+        "A responsive React web app that simulates an online bookstore. Users can browse, filter, sort by price or rating, and see which books are on sale.",
+      imageUrl: "/images/library-screenshot.png",  // ✅ FIXED property name
+      liveUrl: "https://libraryproject.vercel.app",
+      githubUrl: "https://github.com/jradame/LIBRARYPROJECT",
+      technologies: ["React", "CSS3", "JavaScript", "Vercel"],
+      category: "Frontend",
+      status: "LIVE",
+      featured: true,
+    },
+   {
+  id: 3,
+  title: "Ultraverse NFT Marketplace 🖼️", // added NFT emoji
+  description:
+    "React NFT marketplace with dark/light themes and smooth navigation. Built from scratch and deployed on Vercel.",
+  imageUrl: "/images/ultraverse-screenshot.png", // ✅ changed to imageUrl
+  liveUrl: "https://ultraverse-nft-project.vercel.app/",
+  githubUrl: "https://github.com/jradame/ultraverse-nft-project",
+  technologies: ["React", "CSS3", "JavaScript", "React Router", "Vercel"],
+  category: "Frontend",
+  status: "LIVE",
+  featured: true,
+},
 
- // ✅ GitHub repo
-    technologies: ["HTML5", "CSS3", "JavaScript", "OMDb API", "Vercel"],
-    category: "Frontend",
-    status: "LIVE",
-    featured: true,
-  },
-  {
-    id: 2,
-    title: "Library Project 📚",
-    description:
-      "A responsive React web app that simulates an online bookstore. Users can browse, filter, sort by price or rating, and see which books are on sale.",
-    image: "/images/library-screenshot.png",
-    liveUrl: "https://libraryproject.vercel.app", // ✅ Live demo
-    githubUrl: "https://github.com/jradame/LIBRARYPROJECT", // ✅ GitHub repo
-    technologies: ["React", "CSS3", "JavaScript", "Vercel"],
-    category: "Frontend",
-    status: "LIVE",
-    featured: true,
-  },
-  {
-    id: 3,
-    title: "Ultraverse NFT Marketplace",
-    description:
-      "React NFT marketplace with dark/light themes and smooth navigation. Built from scratch and deployed on Vercel.",
-    image: "/images/ultraverse-screenshot.png",
-    liveUrl: "https://ultraverse-nft-project.vercel.app/", // ✅ Live demo
-    githubUrl: "https://github.com/jradame/ultraverse-nft-project", // ✅ GitHub repo
-    technologies: ["React", "CSS3", "JavaScript", "React Router", "Vercel"],
-    category: "Frontend",
-    status: "LIVE",
-    featured: true,
-  },
-];
-
+  ];
 
   const handleLinkClick = (url) => {
     window.open(url, '_blank', 'noopener,noreferrer');
@@ -103,7 +100,7 @@ const Projects = ({ loading }) => {
               >
                 <div className="project-block">
                   <div className="project-image-container">
-                    {project.imageUrl ? (
+                    {project.imageUrl ? (  // ✅ Now matches your data
                       <img
                         src={project.imageUrl}
                         alt={`${project.title} screenshot`}
@@ -111,11 +108,8 @@ const Projects = ({ loading }) => {
                       />
                     ) : (
                       <div className="project-icon-placeholder">
-                        <FontAwesomeIcon icon={project.icon} />
-                        <div className="project-status-overlay">
-                          <FontAwesomeIcon icon={faCalendarAlt} />
-                          <span>{project.status}</span>
-                        </div>
+                        <FontAwesomeIcon icon={faCalendarAlt} />
+                        <span>{project.status}</span>
                       </div>
                     )}
                   </div>
@@ -166,6 +160,7 @@ const Projects = ({ loading }) => {
 };
 
 export default Projects;
+
 
 
 
