@@ -15,7 +15,7 @@ const Projects = ({ loading }) => {
    * My project data - real NFT marketplace I built, plus some coming soon ones
    * The Ultraverse project is live and working, others are in planning
    */
-    const projects = [
+  const projects = [
   {
     id: 1,
     title: "CineScope 🎬",
@@ -23,36 +23,37 @@ const Projects = ({ loading }) => {
     image: "/images/cinescope-preview.png",
     liveUrl: "https://cinescope-project.vercel.app/",
     githubUrl: "https://github.com/jradame/CINESCOPE",
-    technologies: ["HTML5", "CSS3", "JavaScript", "OMDb API"],
+    technologies: ["HTML5", "CSS3", "JavaScript", "OMDb API", "Vercel"],
     category: "Frontend",
     status: "LIVE",
-    featured: true
+    featured: true,
   },
   {
     id: 2,
     title: "Library Project",
-    description: "An online bookstore built with React where users can browse, sort, and filter books. Includes ratings, pricing, and discount functionality.",
+    description: "A responsive web app built with React that simulates an online bookstore. Users can browse books, view ratings, and filter/sort by price or rating.",
     image: "/images/library-screenshot.png",
     liveUrl: "https://libraryproject.vercel.app/",
     githubUrl: "https://github.com/jradame/LIBRARYPROJECT",
-    technologies: ["React", "CSS3", "JavaScript", "React Router"],
+    technologies: ["React", "CSS3", "JavaScript", "React Router", "Vercel"],
     category: "Frontend",
     status: "LIVE",
-    featured: true
+    featured: true,
   },
   {
     id: 3,
     title: "Ultraverse NFT Marketplace",
-    description: "Built this React NFT marketplace from scratch with dark/light themes and smooth navigation. Pretty happy with how clean it turned out.",
+    description: "React NFT marketplace with dark/light themes and smooth navigation. Built from scratch and deployed on Vercel.",
     image: "/images/ultraverse-screenshot.png",
     liveUrl: "https://ultraverse-nft-project.vercel.app/",
     githubUrl: "https://github.com/jradame/ultraverse-nft-project",
     technologies: ["React", "CSS3", "JavaScript", "React Router", "Vercel"],
     category: "Frontend",
     status: "LIVE",
-    featured: true
-  }
+    featured: true,
+  },
 ];
+
 
 
 
