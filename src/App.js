@@ -110,7 +110,8 @@ function App() {
       "Search movies, TV shows, and games using the OMDb API. Features modals, skeleton loaders, and smooth UI interactions.",
     status: "COMPLETED",
     imageUrl: "/images/cinescope-preview.png",
-    githubUrl: "https://github.com/jradame/CINESCOPE",
+    githubUrl: githubUrl: "https://github.com/jradame/CINESCOPE-PROJECT",
+
     liveUrl: "https://cinescope-project.vercel.app",
     technologies: ["HTML5", "CSS3", "JavaScript", "OMDb API", "Vercel"],
   },
