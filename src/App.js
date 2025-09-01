@@ -102,39 +102,43 @@ function App() {
   // PROJECTS
   // ==============================
   const projects = [
-    {
-      icon: faGem,
-      title: "CineScope 🎬",
-      category: "Frontend Development",
-      description: "Search movies, TV shows, and games using the OMDb API. Features modals, skeleton loaders, and smooth UI interactions.",
-      status: "COMPLETED",
-      imageUrl: "/images/cinescope-preview.png",
-      githubUrl: "https://github.com/jradame/CINESCOPE",
-      liveUrl: "https://cinescope-project.vercel.app",
-      technologies: ["HTML5", "CSS3", "JavaScript", "OMDb API", "Vercel"]
-    },
-    {
-      icon: faGem,
-      title: "Dashboard Application",
-      category: "Frontend",
-      description: "Interactive data visualization and analytics dashboard with real-time updates, charts, and responsive design for business intelligence.",
-      status: "COMING SOON",
-      githubUrl: "https://github.com/yourusername/dashboard-project",
-      liveUrl: null,
-      technologies: ["React", "Chart.js", "CSS3"]
-    },
-    {
-      icon: faGem,
-      title: "Ultraverse NFT Marketplace",
-      category: "Frontend Development",
-      description: "React NFT marketplace with dark/light themes and smooth navigation. Built from scratch and deployed on Vercel.",
-      status: "COMPLETED",
-      imageUrl: "/images/NFT-LANDING-PAGE.png",
-      githubUrl: "https://github.com/jradame/ultraverse-nft-project",
-      liveUrl: "https://ultraverse-nft-project.vercel.app/",
-      technologies: ["React", "CSS3", "JavaScript", "React Router", "Vercel"]
-    }
-  ];
+  {
+    icon: faGem,
+    title: "CineScope 🎬",
+    category: "Frontend Development",
+    description:
+      "Search movies, TV shows, and games using the OMDb API. Features modals, skeleton loaders, and smooth UI interactions.",
+    status: "COMPLETED",
+    imageUrl: "/images/cinescope-preview.png",
+    githubUrl: "https://github.com/jradame/CINESCOPE",
+    liveUrl: "https://cinescope-project.vercel.app",
+    technologies: ["HTML5", "CSS3", "JavaScript", "OMDb API", "Vercel"],
+  },
+  {
+    icon: faGem,
+    title: "Library Project 📚",
+    category: "Frontend Development",
+    description:
+      "A responsive React web app that simulates an online bookstore. Users can browse, filter, sort by price or rating, and see which books are on sale.",
+    status: "COMPLETED",
+    imageUrl: "/images/library-screenshot.png",
+    githubUrl: "https://github.com/jradame/LIBRARYPROJECT",
+    liveUrl: "https://libraryproject.vercel.app",
+    technologies: ["React", "CSS3", "JavaScript", "React Router", "Vercel"],
+  },
+  {
+    icon: faGem,
+    title: "Ultraverse NFT Marketplace",
+    category: "Frontend Development",
+    description:
+      "React NFT marketplace with dark/light themes and smooth navigation. Built from scratch and deployed on Vercel.",
+    status: "COMPLETED",
+    imageUrl: "/images/ultraverse-screenshot.png",
+    githubUrl: "https://github.com/jradame/ultraverse-nft-project",
+    liveUrl: "https://ultraverse-nft-project.vercel.app/",
+    technologies: ["React", "CSS3", "JavaScript", "React Router", "Vercel"],
+  },
+];
 
   return (
     <div className="App">
