@@ -16,41 +16,44 @@ const Projects = ({ loading }) => {
    * The Ultraverse project is live and working, others are in planning
    */
     const projects = [
-    {
-      id: 1,
-      title: "CineScope",
-      description: "Search movies, TV shows, and games using the OMDb API. Features modals, skeleton loaders, and smooth UI interactions.",
-      image: "/images/cinescope-preview.png", // save screenshot here
-      liveUrl: "https://cinescope-project.vercel.app/",
-      githubUrl: "https://github.com/jradame/CINESCOPE",
-      technologies: ["HTML5", "CSS3", "JavaScript", "OMDb API", "Vercel"],
-      category: "Frontend",
-      status: "LIVE"
-    },
-    {
-      id: 2,
-      title: "Library Project",
-      description: "A responsive React web app simulating an online bookstore. Users can browse books, view ratings, filter/sort by price or rating, and check discounts. Built with reusable components and clean state management.",
-      image: "/images/library-screenshot.png", // save screenshot here
-      liveUrl: "https://libraryproject.vercel.app/",
-      githubUrl: "https://github.com/jradame/LIBRARYPROJECT",
-      technologies: ["React", "CSS3", "JavaScript", "React Router", "Vercel"],
-      category: "Frontend",
-      status: "LIVE"
-    },
-    {
-      id: 3,
-      title: "Ultraverse NFT Marketplace",
-      description: "Built this React NFT marketplace from scratch with dark/light themes and smooth navigation. Pretty happy with how clean it turned out.",
-      image: "/images/ultraverse-screenshot.png",
-      liveUrl: "https://ultraverse-nft-project.vercel.app/",
-      githubUrl: "https://github.com/jradame/ultraverse-nft-project",
-      technologies: ["React", "CSS3", "JavaScript", "React Router", "Vercel"],
-      category: "Frontend",
-      status: "LIVE",
-      featured: true
-    }
-  ];
+  {
+    id: 1,
+    title: "CineScope 🎬",
+    description: "Search movies, TV shows, and games using the OMDb API. Features modals, skeleton loaders, and smooth UI interactions.",
+    image: "/images/cinescope-preview.png",
+    liveUrl: "https://cinescope-project.vercel.app/",
+    githubUrl: "https://github.com/jradame/CINESCOPE",
+    technologies: ["HTML5", "CSS3", "JavaScript", "OMDb API"],
+    category: "Frontend",
+    status: "LIVE",
+    featured: true
+  },
+  {
+    id: 2,
+    title: "Library Project",
+    description: "An online bookstore built with React where users can browse, sort, and filter books. Includes ratings, pricing, and discount functionality.",
+    image: "/images/library-screenshot.png",
+    liveUrl: "https://libraryproject.vercel.app/",
+    githubUrl: "https://github.com/jradame/LIBRARYPROJECT",
+    technologies: ["React", "CSS3", "JavaScript", "React Router"],
+    category: "Frontend",
+    status: "LIVE",
+    featured: true
+  },
+  {
+    id: 3,
+    title: "Ultraverse NFT Marketplace",
+    description: "Built this React NFT marketplace from scratch with dark/light themes and smooth navigation. Pretty happy with how clean it turned out.",
+    image: "/images/ultraverse-screenshot.png",
+    liveUrl: "https://ultraverse-nft-project.vercel.app/",
+    githubUrl: "https://github.com/jradame/ultraverse-nft-project",
+    technologies: ["React", "CSS3", "JavaScript", "React Router", "Vercel"],
+    category: "Frontend",
+    status: "LIVE",
+    featured: true
+  }
+];
+
 
 
   // Open links in new tab - don't want people leaving my portfolio
