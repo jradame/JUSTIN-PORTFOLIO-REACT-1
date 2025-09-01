@@ -52,18 +52,74 @@ const Modal = ({ isOpen, onClose, loading, modalType }) => {
     <div 
       className={`modal-overlay ${isVisible ? 'open' : 'close'}`} 
       onClick={onClose}
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        width: "100vw",
+        height: "100vh",
+        background: "rgba(0,0,0,0.7)",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        zIndex: 9999,
+        opacity: isVisible ? 1 : 0,
+        transition: "opacity 0.4s ease-in-out"
+      }}
     >
       <div 
         className={`modal ${isVisible ? 'open' : 'close'}`} 
         onClick={(e) => e.stopPropagation()}
+        style={{
+          background: "#1f2937",
+          borderRadius: "12px",
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          width: "90%",
+          maxWidth: "1000px",
+          minHeight: "500px",
+          overflow: "hidden",
+          position: "relative",
+          boxShadow: "0 15px 35px rgba(0,0,0,0.5)",
+          transform: isVisible ? "translateY(0)" : "translateY(80px)",
+          opacity: isVisible ? 1 : 0,
+          transition: "all 0.5s cubic-bezier(0.22, 1, 0.36, 1)"
+        }}
       >
         {/* Close button */}
-        <button className="modal__exit" onClick={onClose}>
+        <button 
+          className="modal__exit" 
+          onClick={onClose}
+          style={{
+            position: "absolute",
+            top: "1rem",
+            right: "1rem",
+            background: "transparent",
+            border: "none",
+            color: "#fff",
+            fontSize: "1.5rem",
+            cursor: "pointer",
+            zIndex: 10001
+          }}
+        >
           <FontAwesomeIcon icon={faTimes} />
         </button>
         
         {/* LEFT SIDE */}
-        <div className={`modal__half modal__left ${isVisible ? 'slide-in' : 'slide-out'}`}>
+        <div 
+          className="modal__half modal__left"
+          style={{
+            flex: 1,
+            padding: "2rem",
+            background: "#111827",
+            color: "#fff",
+            overflowY: "auto",
+            transform: isVisible ? "translateX(0)" : "translateX(-100px)",
+            opacity: isVisible ? 1 : 0,
+            transition: "all 0.5s ease"
+          }}
+        >
           {modalType === 'about' ? (
             <div className="modal__about">
               <div className="about-content--balanced">
@@ -140,7 +196,19 @@ const Modal = ({ isOpen, onClose, loading, modalType }) => {
         </div>
         
         {/* RIGHT SIDE */}
-        <div className={`modal__half modal__right ${isVisible ? 'slide-in' : 'slide-out'}`}>
+        <div 
+          className="modal__half modal__right"
+          style={{
+            flex: 1,
+            padding: "2rem",
+            background: "#1f2937",
+            color: "#fff",
+            overflowY: "auto",
+            transform: isVisible ? "translateX(0)" : "translateX(100px)",
+            opacity: isVisible ? 1 : 0,
+            transition: "all 0.5s ease"
+          }}
+        >
           <div className="modal__contact">
             <div className="contact-form-content">
               <div>
@@ -215,6 +283,7 @@ const Modal = ({ isOpen, onClose, loading, modalType }) => {
 };
 
 export default Modal;
+
 
 
 
