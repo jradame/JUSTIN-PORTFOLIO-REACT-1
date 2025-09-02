@@ -14,10 +14,8 @@ const Footer = ({ loading, toggleModal }) => {
   // Auto-updates the year so I don't have to remember to change it every January
   const currentYear = new Date().getFullYear();
 
-  /* 
-   * Same smooth scroll function as the navbar - keeps things consistent
-   * Nothing worse than jarring page jumps when you click a logo
-   */
+  /* SCROLL */
+
   const scrollToTop = () => {
     window.scrollTo({ 
       top: 0, 
@@ -26,17 +24,13 @@ const Footer = ({ loading, toggleModal }) => {
     });
   };
 
-  // Make the brand name clickable and scroll to top
   const handleBrandClick = (e) => {
     e.preventDefault();
     scrollToTop();
   };
 
-  /* 
-   * All my social links and resume in one place
-   * Easy to update or add new platforms later
-   * TODO: Need to upload actual resume and update that link
-   */
+  /* DATA */
+
   const socialLinks = [
     {
       name: "LinkedIn",
@@ -55,10 +49,8 @@ const Footer = ({ loading, toggleModal }) => {
     }
   ];
 
-  /* 
-   * Quick links navigation - Projects scrolls to section, others open modals
-   * Keeps the same interaction patterns as the main nav
-   */
+  /* HANDLERS */
+
   const handleQuickLinkClick = (type) => {
     if (type === 'projects') {
       // Scroll to projects instead of opening a modal
@@ -72,11 +64,8 @@ const Footer = ({ loading, toggleModal }) => {
     }
   };
 
-  /* 
-   * Loading state with skeleton placeholders
-   * Keeps the layout stable while everything loads up
-   * Made sure the skeleton sizes match the real content
-   */
+  /* LOADING */
+
   if (loading) {
     return (
       <footer className="footer">
@@ -117,14 +106,13 @@ const Footer = ({ loading, toggleModal }) => {
     );
   }
 
+  /* RENDER */
+
   return (
     <footer className="footer">
       <div className="footer__container">
         <div className="footer__content">
-          {/* 
-           * Left column - Brand stuff and social links
-           * Made the brand name clickable like the navbar logo
-           */}
+          {/* BRAND */}
           <div className="footer__section footer__section--brand">
             <button
               className="footer__brand footer__brand-button"
@@ -138,7 +126,6 @@ const Footer = ({ loading, toggleModal }) => {
               Frontend Developer passionate about creating beautiful, user-friendly web experiences with modern technologies.
             </p>
             
-            {/* Social media links - opens in new tabs so people don't leave my site */}
             <div className="footer__social">
               {socialLinks.map((link, index) => (
                 <a
@@ -156,10 +143,7 @@ const Footer = ({ loading, toggleModal }) => {
             </div>
           </div>
 
-          {/* 
-           * Middle column - Quick navigation
-           * Same functionality as the main nav but in footer form
-           */}
+          {/* LINKS */}
           <div className="footer__section">
             <h4 className="footer__section-title">Quick Links</h4>
             <ul className="footer__links">
@@ -193,10 +177,7 @@ const Footer = ({ loading, toggleModal }) => {
             </ul>
           </div>
 
-          {/* 
-           * Right column - Contact info and encouragement
-           * Email opens the contact modal instead of default mail app
-           */}
+          {/* CONTACT */}
           <div className="footer__section">
             <h4 className="footer__section-title">Get In Touch</h4>
             <div className="footer__contact">
@@ -215,10 +196,7 @@ const Footer = ({ loading, toggleModal }) => {
           </div>
         </div>
 
-        {/* 
-         * Bottom copyright section with animated heart
-         * Auto-updates the year and mentions my tech stack
-         */}
+        {/* COPYRIGHT */}
         <div className="footer__bottom">
           <div className="footer__copyright">
             <p>
@@ -234,3 +212,4 @@ const Footer = ({ loading, toggleModal }) => {
 };
 
 export default Footer;
+

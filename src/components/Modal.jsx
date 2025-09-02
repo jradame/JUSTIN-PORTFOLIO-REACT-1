@@ -7,6 +7,8 @@ const Modal = ({ isOpen, onClose, loading, modalType }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [shouldRender, setShouldRender] = useState(false);
 
+  /* MODAL VISIBILITY */
+
   useEffect(() => {
     if (isOpen) {
       setShouldRender(true);
@@ -17,6 +19,8 @@ const Modal = ({ isOpen, onClose, loading, modalType }) => {
     }
   }, [isOpen]);
 
+  /* FORM STATE */
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -24,6 +28,8 @@ const Modal = ({ isOpen, onClose, loading, modalType }) => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+
+  /* FORM HANDLERS */
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -47,6 +53,8 @@ const Modal = ({ isOpen, onClose, loading, modalType }) => {
   };
 
   if (!shouldRender) return null;
+
+  /* RENDER */
 
   return (
     <div 
@@ -87,7 +95,7 @@ const Modal = ({ isOpen, onClose, loading, modalType }) => {
           transition: "all 0.5s cubic-bezier(0.22, 1, 0.36, 1)"
         }}
       >
-        {/* Close button */}
+        {/* CLOSE BUTTON */}
         <button 
           className="modal__exit" 
           onClick={onClose}
@@ -283,6 +291,7 @@ const Modal = ({ isOpen, onClose, loading, modalType }) => {
 };
 
 export default Modal;
+
 
 
 
