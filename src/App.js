@@ -1,21 +1,19 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSun, faMoon, faExternalLinkAlt, faGem, faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
-import { faGithub as faGithubBrand } from '@fortawesome/free-brands-svg-icons';
+import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import './App.css';
 
-// Import your new and existing components
-import Hero from './components/Hero'; 
+// Import all your components
+import Hero from './components/Hero';
+import Projects from './components/Projects';
 import Modal from './components/Modal';
 import Footer from './components/Footer';
 
 function App() {
-  const [isDarkMode, setIsDarkMode] = useState(() => {
-    const savedTheme = localStorage.getItem('theme');
-    return savedTheme === 'dark';
-  });
+  // --- STATE MANAGEMENT ---
+  const [isDarkMode, setIsDarkMode] = useState(() => localStorage.getItem('theme') === 'dark');
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [loading, setLoading] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
@@ -23,39 +21,23 @@ function App() {
   const [modalLoading, setModalLoading] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const modalRef = useRef();
-
+  // --- HANDLERS & LOGIC ---
   useEffect(() => {
-    if (isDarkMode) {
-      document.body.classList.add('dark-theme');
-    } else {
-      document.body.classList.remove('dark-theme');
-    }
-
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 2000);
-
+    // Apply theme and set up the initial loading timer.
+    document.body.classList.toggle('dark-theme', isDarkMode);
+    const timer = setTimeout(() => setLoading(false), 2000);
     return () => clearTimeout(timer);
   }, [isDarkMode]);
 
   const toggleTheme = () => {
     if (isTransitioning) return;
-
     setIsTransitioning(true);
     document.body.classList.add('theme-transitioning');
-
+    
     const newTheme = !isDarkMode;
     setIsDarkMode(newTheme);
-
-    if (newTheme) {
-      document.body.classList.add('dark-theme');
-      localStorage.setItem('theme', 'dark');
-    } else {
-      document.body.classList.remove('dark-theme');
-      localStorage.setItem('theme', 'light');
-    }
-
+    localStorage.setItem('theme', newTheme ? 'dark' : 'light');
+    
     setTimeout(() => {
       document.body.classList.remove('theme-transitioning');
       setIsTransitioning(false);
@@ -67,10 +49,7 @@ function App() {
     setModalLoading(true);
     setModalOpen(true);
     setMenuOpen(false);
-
-    setTimeout(() => {
-      setModalLoading(false);
-    }, 800);
+    setTimeout(() => setModalLoading(false), 800);
   };
 
   const closeModal = () => {
@@ -85,42 +64,6 @@ function App() {
     document.querySelector('.projects').scrollIntoView({ behavior: 'smooth' });
     if (menuOpen) setMenuOpen(false);
   };
-
-  const projects = [
-    {
-      icon: faGem,
-      title: 'CineScope 🎬',
-      category: 'Frontend Development',
-      description: 'Search movies, TV shows, and games using the OMDb API. Features modals, skeleton loaders, and smooth UI interactions.',
-      status: 'COMPLETED',
-      imageUrl: '/images/cinescope-preview.png',
-      githubUrl: 'https://github.com/jradame/CINESCOPE-PROJECT',
-      liveUrl: 'https://cinescope-project.vercel.app',
-      technologies: ['HTML5', 'CSS3', 'JavaScript', 'OMDb API', 'Vercel']
-    },
-    {
-      icon: faGem,
-      title: 'Library Project 📚',
-      category: 'Frontend Development',
-      description: 'A responsive React web app that simulates an online bookstore. Users can browse, filter, sort by price or rating, and see which books are on sale.',
-      status: 'COMPLETED',
-      imageUrl: '/images/library-screenshot.png',
-      githubUrl: 'https://github.com/jradame/LIBRARYPROJECT',
-      liveUrl: 'https://libraryproject.vercel.app',
-      technologies: ['React', 'CSS3', 'JavaScript', 'React Router', 'Vercel']
-    },
-    {
-      icon: faGem,
-      title: 'Ultraverse NFT Marketplace',
-      category: 'Frontend Development',
-      description: 'React NFT marketplace with dark/light themes and smooth navigation. Built from scratch and deployed on Vercel.',
-      status: 'COMPLETED',
-      imageUrl: '/images/ultraverse-screenshot.png',
-      githubUrl: 'https://github.com/jradame/ultraverse-nft-project',
-      liveUrl: 'https://ultraverse-nft-project.vercel.app/',
-      technologies: ['React', 'CSS3', 'JavaScript', 'React Router', 'Vercel']
-    }
-  ];
 
   return (
     <div className="App">
@@ -160,69 +103,17 @@ function App() {
         {menuOpen && <div className="menu-overlay" onClick={closeMenu} aria-label="Close menu" />}
       </nav>
 
-      {/* HERO COMPONENT */}
+      {/* RENDER COMPONENTS */}
       <Hero loading={loading} openModal={openModal} />
-
-      {/* PROJECTS SECTION */}
-      <section className="projects">
-        <div className="projects__container">
-          <h2 className="section__title">My <span className="blue">Projects</span></h2>
-          <div className="projects__cards">
-            {loading ? (
-              [...Array(3)].map((_, i) => (
-                <div key={i} className="project-block project-block--loading">
-                  <div className="project-image-container"><Skeleton height="270px" className="project-image-simple" /></div>
-                  <div className="project-simple-info">
-                    <Skeleton width="70%" height="20px" />
-                    <Skeleton count={2} />
-                    <div style={{ display: 'flex', gap: '0.8rem', marginTop: '0.6rem' }}>
-                      <Skeleton width="80px" height="28px" />
-                      <Skeleton width="60px" height="28px" />
-                    </div>
-                    <div style={{ display: 'flex', gap: '0.3rem', marginTop: '0.6rem' }}>
-                      <Skeleton width="45px" height="16px" /><Skeleton width="45px" height="16px" />
-                    </div>
-                  </div>
-                </div>
-              ))
-            ) : (
-              projects.map((project, idx) => (
-                <div key={idx} className="project-block">
-                  <div className="project-image-container">
-                    {project.imageUrl ? (
-                      <img src={project.imageUrl} alt={`${project.title} screenshot`} className="project-image-simple" onError={(e) => { e.target.src = `https://via.placeholder.com/370x270/3b82f6/ffffff?text=${encodeURIComponent(project.title)}`; }} />
-                    ) : (
-                      <div className="project-icon-placeholder">
-                        <FontAwesomeIcon icon={project.icon} /><div className="project-status-overlay"><FontAwesomeIcon icon={faCalendarAlt} /><span>{project.status}</span></div>
-                      </div>
-                    )}
-                  </div>
-                  <div className="project-simple-info">
-                    <h3 className="project-simple-title">{project.title}{project.title.includes("NFT") && <span className="emoji">💎</span>}</h3>
-                    <p className="project-simple-desc">{project.description}</p>
-                    <div className="project-simple-links">
-                      {project.liveUrl && <a href={project.liveUrl} className="project-simple-btn" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faExternalLinkAlt} /> Live Demo</a>}
-                      <a href={project.githubUrl} className="project-simple-btn project-simple-btn-github" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faGithubBrand} /> GitHub</a>
-                    </div>
-                    <div className="project-simple-tags">{project.technologies.map((tech, tIdx) => (<span key={tIdx} className="project-simple-tag">{tech}</span>))}</div>
-                  </div>
-                </div>
-              ))
-            )}
-          </div>
-        </div>
-      </section>
-
-      {/* FOOTER */}
+      <Projects loading={loading} />
       <Footer loading={loading} toggleModal={openModal} />
-
-      {/* MODAL */}
-      <Modal isOpen={modalOpen} onClose={closeModal} loading={modalLoading} modalType={modalType} ref={modalRef} />
+      <Modal isOpen={modalOpen} onClose={closeModal} loading={modalLoading} modalType={modalType} />
     </div>
   );
 }
 
 export default App;
+
 
 
 

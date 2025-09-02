@@ -1,14 +1,5 @@
 import React from 'react';
 import Skeleton from 'react-loading-skeleton';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faLinkedin as faLinkedinBrand,
-  faGithub as faGithubBrand,
-  faTwitter,
-} from '@fortawesome/free-brands-svg-icons';
-
-// You can uncomment this when you have a photo
-// import profilePhoto from '../assets/profile-photo.jpg';
 
 const Hero = ({ loading, openModal }) => {
   return (
@@ -16,7 +7,7 @@ const Hero = ({ loading, openModal }) => {
       <div className="hero-container">
         <div className="hero-content-wrapper">
           <div className="hero-image-container">
-            {/*  add image here: */}
+            {/* Ready for your photo when you are */}
             {/* <img src={profilePhoto} alt="Justin Adame" className="hero-photo" /> */}
           </div>
 
@@ -53,19 +44,6 @@ const Hero = ({ loading, openModal }) => {
                   </button>
                 </div>
               </>
-            )}
-            {!loading && (
-              <div className="social-links">
-                <a href="https://linkedin.com/in/justin-adame" className="social-link" aria-label="LinkedIn">
-                  <FontAwesomeIcon icon={faLinkedinBrand} />
-                </a>
-                <a href="https://github.com/justin-adame" className="social-link" aria-label="GitHub">
-                  <FontAwesomeIcon icon={faGithubBrand} />
-                </a>
-                <a href="https://twitter.com/justin_adame" className="social-link" aria-label="Twitter">
-                  <FontAwesomeIcon icon={faTwitter} />
-                </a>
-              </div>
             )}
           </div>
         </div>

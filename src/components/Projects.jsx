@@ -5,55 +5,42 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarAlt, faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import Skeleton from 'react-loading-skeleton';
-import ScrollReveal from './ScrollReveal';
+import ScrollReveal from './ScrollReveal'; // Assuming this is a local component
 
 const Projects = ({ loading }) => {
+  // Project data array.
   const projects = [
     {
-      id: 1,
-      title: "CineScope 🎬",
-      description:
-        "Search movies, TV shows, and games using the OMDb API. Features modals, skeleton loaders, and smooth UI interactions.",
-      imageUrl: "/images/cinescope-preview.png",   // ✅ FIXED property name
-      liveUrl: "https://cinescope-project.vercel.app",
-      githubUrl: "https://github.com/jradame/CINESCOPE-PROJECT",
-      technologies: ["HTML5", "CSS3", "JavaScript", "OMDb API", "Vercel"],
-      category: "Frontend",
-      status: "LIVE",
-      featured: true,
+      title: 'CineScope 🎬',
+      description: 'Search movies, TV shows, and games using the OMDb API. Features modals, skeleton loaders, and smooth UI interactions.',
+      imageUrl: '/images/cinescope-preview.png',
+      liveUrl: 'https://cinescope-project.vercel.app',
+      githubUrl: 'https://github.com/jradame/CINESCOPE-PROJECT',
+      technologies: ['HTML5', 'CSS3', 'JavaScript', 'OMDb API', 'Vercel'],
+      category: 'Frontend',
+      status: 'LIVE'
     },
     {
-      id: 2,
-      title: "Library Project 📚",
-      description:
-        "A responsive React web app that simulates an online bookstore. Users can browse, filter, sort by price or rating, and see which books are on sale.",
-      imageUrl: "/images/library-screenshot.png",  // ✅ FIXED property name
-      liveUrl: "https://libraryproject.vercel.app",
-      githubUrl: "https://github.com/jradame/LIBRARYPROJECT",
-      technologies: ["React", "CSS3", "JavaScript", "Vercel"],
-      category: "Frontend",
-      status: "LIVE",
-      featured: true,
+      title: 'Library Project 📚',
+      description: 'A responsive React web app that simulates an online bookstore. Users can browse, filter, sort by price or rating, and see which books are on sale.',
+      imageUrl: '/images/library-screenshot.png',
+      liveUrl: 'https://libraryproject.vercel.app',
+      githubUrl: 'https://github.com/jradame/LIBRARYPROJECT',
+      technologies: ['React', 'CSS3', 'JavaScript', 'Vercel'],
+      category: 'Frontend',
+      status: 'LIVE'
     },
-   {
-  id: 3,
-  title: "Ultraverse NFT Marketplace 🖼️", // added NFT emoji
-  description:
-    "React NFT marketplace with dark/light themes and smooth navigation. Built from scratch and deployed on Vercel.",
-  imageUrl: "/images/ultraverse-screenshot.png", // ✅ changed to imageUrl
-  liveUrl: "https://ultraverse-nft-project.vercel.app/",
-  githubUrl: "https://github.com/jradame/ultraverse-nft-project",
-  technologies: ["React", "CSS3", "JavaScript", "React Router", "Vercel"],
-  category: "Frontend",
-  status: "LIVE",
-  featured: true,
-},
-
+    {
+      title: 'Ultraverse NFT Marketplace 🖼️',
+      description: 'React NFT marketplace with dark/light themes and smooth navigation. Built from scratch and deployed on Vercel.',
+      imageUrl: '/images/ultraverse-screenshot.png',
+      liveUrl: 'https://ultraverse-nft-project.vercel.app/',
+      githubUrl: 'https://github.com/jradame/ultraverse-nft-project',
+      technologies: ['React', 'CSS3', 'JavaScript', 'React Router', 'Vercel'],
+      category: 'Frontend',
+      status: 'LIVE'
+    }
   ];
-
-  const handleLinkClick = (url) => {
-    window.open(url, '_blank', 'noopener,noreferrer');
-  };
 
   return (
     <section id="projects" className="projects">
@@ -90,61 +77,49 @@ const Projects = ({ loading }) => {
         ) : (
           <div className="projects__cards">
             {projects.map((project, index) => (
-              <ScrollReveal
-                key={project.title}
-                direction="up"
-                delay={200 + index * 100}
-              >
+              <ScrollReveal key={project.title} direction="up" delay={200 + index * 100}>
                 <div className="project-block">
                   <div className="project-image-container">
-                    {project.imageUrl ? (  // ✅ Now matches your data
-                      <img
-                        src={project.imageUrl}
-                        alt={`${project.title} screenshot`}
-                        className="project-image-simple"
-                      />
-                    ) : (
-                      <div className="project-icon-placeholder">
-                        <FontAwesomeIcon icon={faCalendarAlt} />
-                        <span>{project.status}</span>
-                      </div>
-                    )}
+                    <img
+                      src={project.imageUrl}
+                      alt={`${project.title} screenshot`}
+                      className="project-image-simple"
+                    />
                   </div>
-
                   <div className="project-simple-info">
                     <h3 className="project-simple-title">{project.title}</h3>
                     <p className="project-simple-desc">{project.description}</p>
-
                     <div className="project-simple-links">
                       {project.liveUrl && (
-                        <button
+                        <a
+                          href={project.liveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
                           className="project-simple-btn"
-                          onClick={() => handleLinkClick(project.liveUrl)}
                         >
                           <FontAwesomeIcon icon={faExternalLinkAlt} />
                           View Live
-                        </button>
+                        </a>
                       )}
                       {project.githubUrl && (
-                        <button
+                        <a
+                          href={project.githubUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
                           className="project-simple-btn project-simple-btn-github"
-                          onClick={() => handleLinkClick(project.githubUrl)}
                         >
                           <FontAwesomeIcon icon={faGithub} />
                           View Code
-                        </button>
+                        </a>
                       )}
                     </div>
-
-                    {project.technologies && (
-                      <div className="project-simple-tags">
-                        {project.technologies.map((tech, i) => (
-                          <span key={i} className="project-simple-tag">
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-                    )}
+                    <div className="project-simple-tags">
+                      {project.technologies.map((tech, i) => (
+                        <span key={i} className="project-simple-tag">
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </ScrollReveal>
@@ -157,7 +132,6 @@ const Projects = ({ loading }) => {
 };
 
 export default Projects;
-
 
 
 
