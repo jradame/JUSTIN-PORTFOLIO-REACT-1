@@ -1,6 +1,6 @@
 /*
  * App.js - Main React component tying everything together
- * Added missing import for faCalendarAlt used in project placeholders
+  * Features: Dark/Light mode toggle with smooth transitions, responsive navbar with hamburger menu,
  */
 
 import React, { useEffect, useState, useRef } from 'react';
@@ -226,7 +226,6 @@ function App() {
       <section className="hero">
         <div className="hero-container">
           <div className="hero-content">
-            {/* Removed broken image headshot */}
             <div className="hero-text">
               {loading ? (
                 <>
@@ -364,7 +363,12 @@ function App() {
                     )}
                   </div>
                   <div className="project-simple-info">
-                    <h3 className="project-simple-title">{project.title}</h3>
+                    <h3 className="project-simple-title">
+                      {project.title}
+                      {project.title.includes("NFT") && (
+                        <span className="emoji">💎</span>
+                      )}
+                    </h3>
                     <p className="project-simple-desc">{project.description}</p>
                     <div className="project-simple-links">
                       {project.liveUrl && (
@@ -417,6 +421,7 @@ function App() {
 }
 
 export default App;
+
 
 
 

@@ -1,5 +1,4 @@
 /* 
- * Ultraverse NFT Marketplace - Main Stylesheet
  * My React portfolio site built from scratch 
  * Got dark/light themes working, responsive design, and smooth animations everywhere
  */
@@ -221,54 +220,57 @@ body {
    ========================================================================== */
 
 .hero {
-  min-height: 80vh; /* shorter section */
+  min-height: 70vh; /* ✅ shorter than full screen */
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 4rem 2rem;
-  padding-top: 100px; /* account for navbar */
-  background: var(--bg-primary); /* ✅ white in light mode */
+  padding: 3rem 1rem;
+  background: var(--bg-primary); /* ✅ light mode = white */
   color: var(--text-primary);
+  text-align: center; /* ✅ centers text */
 }
 
 .dark-theme .hero {
-  background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%); /* ✅ dark gradient */
+  background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
 }
 
+/* Layout container */
 .hero-content {
   display: flex;
-  flex-direction: column; /* ✅ stack vertically */
+  flex-direction: column; /* ✅ stack title, text, buttons, socials */
   align-items: center;
-  text-align: center;
+  justify-content: center;
   gap: 2rem;
-  max-width: 800px;
+  max-width: 900px; /* ✅ a bit wider for balance */
   margin: 0 auto;
 }
 
-.hero-text {
-  text-align: center;
+.hero-title {
+  font-size: 4rem;   /* ✅ larger title */
+  font-weight: 900;  /* ✅ bolder */
+  margin-bottom: 1rem;
+  line-height: 1.2;
 }
 
-.hero-title { 
-  font-size: 3rem; 
-  font-weight: 800; 
-  margin-bottom: 1rem; 
-  line-height: 1.2; 
+.hero-subtitle {
+  font-size: 1.5rem;   /* ✅ larger subtitle */
+  font-weight: 400;
+  margin-bottom: 2rem;
+  color: var(--text-secondary);
 }
 
-.hero-subtitle { 
-  font-size: 1.2rem; 
-  margin-bottom: 2rem; 
-  color: var(--text-secondary); 
+.highlight {
+  color: var(--primary);
 }
 
-.highlight { color: var(--primary); }
-
+/* ==============================
+   BUTTONS with shimmer & glow
+   ============================== */
 .hero-buttons {
   display: flex;
-  gap: 1rem;
+  gap: 1.2rem;
   justify-content: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 .btn {
@@ -276,26 +278,62 @@ body {
   padding: 1rem 2.5rem;
   border: none;
   border-radius: 50px;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   font-weight: 600;
   cursor: pointer;
   text-decoration: none;
   display: inline-block;
   overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+/* Shimmer effect */
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transition: left 0.6s ease;
+}
+
+.btn:hover::before {
+  left: 100%;
 }
 
 .btn-primary {
-  background: var(--primary);
+  background: linear-gradient(135deg, var(--primary), var(--accent));
   color: white;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
 }
 
 .btn-secondary {
   background: transparent;
   color: var(--text-primary);
   border: 2px solid var(--border-color);
+  backdrop-filter: blur(10px);
 }
 
+.btn-secondary:hover {
+  background: rgba(0, 0, 0, 0.05);
+  transform: translateY(-3px) scale(1.05);
+}
+
+/* ==============================
+   SOCIAL LINKS
+   ============================== */
 .social-links {
   display: flex;
   gap: 1.5rem;
@@ -308,31 +346,22 @@ body {
   justify-content: center;
   width: 60px;
   height: 60px;
-  background: rgba(0, 0, 0, 0.05);
-  color: var(--text-primary);
   border-radius: 50%;
-  font-size: 1.5rem;
-  text-decoration: none;
+  background: var(--bg-tertiary);
   border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  font-size: 1.4rem;
+  transition: all 0.3s ease;
 }
 
 .social-link:hover {
-  background: rgba(0, 0, 0, 0.1);
+  background: var(--primary);
+  color: white;
   transform: translateY(-5px) scale(1.1);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
 }
 
-
-/* ==========================================================================
-   PROJECTS SECTION - Clean design, no borders anywhere
-   ========================================================================== */
-
-/* 
- * Design decision: Borderless project cards that rely on typography and spacing
- * Let the project images and descriptions do the talking without visual clutter
- * Spent way too much time removing borders that kept appearing from nowhere
- */
-
-/* ==========================================================================
+==========================================================================
    PROJECTS SECTION - Clean, consistent with light/dark theme
    ========================================================================== */
 

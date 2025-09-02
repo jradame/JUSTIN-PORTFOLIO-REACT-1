@@ -1,7 +1,4 @@
-/*
- * Projects section - shows off my NFT marketplace plus some stuff I'm working on
- * The main project gets the big showcase, others are placeholders for now
- */
+
 
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
