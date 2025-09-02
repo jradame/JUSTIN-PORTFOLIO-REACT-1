@@ -3,18 +3,6 @@
  * Added missing import for faCalendarAlt used in project placeholders
  */
 
-/*
- * App.js - Main React component tying everything together
- */
-
-/*
- * App.js - Main React component tying everything together
- */
-
-/*
- * App.js - Main React component tying everything together
- */
-
 import React, { useEffect, useState, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -238,17 +226,7 @@ function App() {
       <section className="hero">
         <div className="hero-container">
           <div className="hero-content">
-            <div className="hero-image">
-              {loading ? (
-                <Skeleton circle width="280px" height="280px" />
-              ) : (
-                <img
-                  src="/images/justin-headshot.png" // ✅ Local image in public/images
-                  alt="Justin Adame"
-                  className="hero-headshot"
-                />
-              )}
-            </div>
+            {/* Removed broken image headshot */}
             <div className="hero-text">
               {loading ? (
                 <>
@@ -439,6 +417,7 @@ function App() {
 }
 
 export default App;
+
 
 
 

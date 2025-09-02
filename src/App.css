@@ -216,35 +216,48 @@ body {
   background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%); 
 }
 
+/* ==========================================================================
+   HERO SECTION - Clean, compact, and centered
+   ========================================================================== */
+
+.hero {
+  min-height: 80vh; /* shorter section */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  padding-top: 100px; /* account for navbar */
+  background: var(--bg-primary); /* ✅ white in light mode */
+  color: var(--text-primary);
+}
+
+.dark-theme .hero {
+  background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%); /* ✅ dark gradient */
+}
+
 .hero-content {
   display: flex;
-  flex-direction: column;     
-  align-items: center;        
-  justify-content: center;    
+  flex-direction: column; /* ✅ stack vertically */
+  align-items: center;
+  text-align: center;
   gap: 2rem;
-  max-width: 1000px;
+  max-width: 800px;
   margin: 0 auto;
-  text-align: center;         
 }
 
-.hero-headshot {
-  display: none;  /* ✅ Hides broken image completely */
-}
-
-
-.hero-text { 
-  max-width: 700px;
+.hero-text {
+  text-align: center;
 }
 
 .hero-title { 
-  font-size: 3rem;            /* ✅ Slightly smaller title */
+  font-size: 3rem; 
   font-weight: 800; 
   margin-bottom: 1rem; 
-  line-height: 1.1; 
+  line-height: 1.2; 
 }
 
 .hero-subtitle { 
-  font-size: 1.1rem;          /* ✅ Reduced font size for balance */
+  font-size: 1.2rem; 
   margin-bottom: 2rem; 
   color: var(--text-secondary); 
 }
@@ -254,17 +267,16 @@ body {
 .hero-buttons {
   display: flex;
   gap: 1rem;
-  justify-content: center;   
-  margin-bottom: 1.5rem;     /* ✅ Less spacing */
+  justify-content: center;
+  margin-bottom: 1.5rem;
 }
 
-/* Button System with shimmer effects */
 .btn {
   position: relative;
-  padding: 0.9rem 2rem;       /* ✅ Slightly smaller buttons */
+  padding: 1rem 2.5rem;
   border: none;
   border-radius: 50px;
-  font-size: 1rem;
+  font-size: 1.1rem;
   font-weight: 600;
   cursor: pointer;
   text-decoration: none;
@@ -272,41 +284,16 @@ body {
   overflow: hidden;
 }
 
-.btn::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-  transition: left 0.5s;
-}
-
-.btn:hover::before { left: 100%; }
-
 .btn-primary {
-  background: linear-gradient(135deg, var(--primary), var(--accent));
+  background: var(--primary);
   color: white;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-}
-
-.btn-primary:hover {
-  transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
 }
 
 .btn-secondary {
   background: transparent;
   color: var(--text-primary);
-  border: 2px solid rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(10px);
-}
-
-.btn-secondary:hover {
-  background: rgba(0, 0, 0, 0.05);
-  border-color: rgba(0, 0, 0, 0.4);
-  transform: translateY(-3px) scale(1.05);
+  border: 2px solid var(--border-color);
 }
 
 .social-links {
@@ -319,22 +306,21 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 55px;                /* ✅ Slightly smaller icons */
-  height: 55px;
-  background: rgba(255, 255, 255, 0.1);
+  width: 60px;
+  height: 60px;
+  background: rgba(0, 0, 0, 0.05);
   color: var(--text-primary);
   border-radius: 50%;
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   text-decoration: none;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--border-color);
 }
 
 .social-link:hover {
   background: rgba(0, 0, 0, 0.1);
-  transform: translateY(-5px) scale(1.15);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px) scale(1.1);
 }
+
 
 /* ==========================================================================
    PROJECTS SECTION - Clean design, no borders anywhere
