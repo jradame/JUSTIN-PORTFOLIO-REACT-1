@@ -209,6 +209,7 @@ body {
   color: var(--text-primary);
 }
 
+
 .dark-theme .hero { 
   background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%); 
 }
