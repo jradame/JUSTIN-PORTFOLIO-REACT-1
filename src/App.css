@@ -910,6 +910,45 @@ body {
 }
 
 .form__success p { color: var(--text-muted); font-size: 0.9rem; }
+/* MODAL FORM TEXT FIXES - Light Mode Only - White Text */
+
+/* Target all text elements in modal right side for light mode */
+body:not(.dark-theme) .modal__right * {
+  color: white !important;
+}
+
+/* Form labels - white */
+body:not(.dark-theme) .modal__right .form__item--label {
+  color: white !important;
+}
+
+/* Input fields - white text */
+body:not(.dark-theme) .modal__right .input {
+  color: white !important;
+}
+
+/* Input placeholders - light white */
+body:not(.dark-theme) .modal__right .input::placeholder {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+/* Modal titles - white */
+body:not(.dark-theme) .modal__right .modal__title--contact {
+  color: white !important;
+}
+
+body:not(.dark-theme) .modal__right .modal__sub-title--contact {
+  color: white !important;
+}
+
+/* Button text stays white */
+body:not(.dark-theme) .modal__right .form__submit {
+  color: white !important;
+}
+
+
+
+
 
 /* FOOTER */
 
