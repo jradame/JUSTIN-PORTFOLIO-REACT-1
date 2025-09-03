@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faTimes, faCode, faPalette, faMobileAlt } from '@fortawesome/free-solid-svg-icons';
 import { faHtml5, faCss3Alt, faJs, faReact, faFigma } from '@fortawesome/free-brands-svg-icons';
+
 
 const Modal = ({ isOpen, onClose, modalType }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -9,6 +10,7 @@ const Modal = ({ isOpen, onClose, modalType }) => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+
 
   /* MODAL VISIBILITY */
   useEffect(() => {
@@ -21,6 +23,7 @@ const Modal = ({ isOpen, onClose, modalType }) => {
     }
   }, [isOpen]);
 
+
   /* FORM HANDLERS */
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,12 +32,14 @@ const Modal = ({ isOpen, onClose, modalType }) => {
     setIsSubmitting(false);
     setIsSubmitted(true);
 
+
     setTimeout(() => {
       setIsSubmitted(false);
       setFormData({ name: '', email: '', message: '' });
       onClose();
     }, 3000);
   };
+
 
   const handleInputChange = (e) => {
     setFormData((prev) => ({
@@ -43,7 +48,9 @@ const Modal = ({ isOpen, onClose, modalType }) => {
     }));
   };
 
+
   if (!shouldRender) return null;
+
 
   /* RENDER */
   return (
@@ -103,6 +110,7 @@ const Modal = ({ isOpen, onClose, modalType }) => {
           <FontAwesomeIcon icon={faTimes} />
         </button>
 
+
         {/* --- LEFT SIDE --- */}
         <div
           className="modal__half modal__left"
@@ -148,22 +156,52 @@ const Modal = ({ isOpen, onClose, modalType }) => {
           ) : (
             <div className="modal__contact-info">
               <div className="contact-info-content">
-                <div className="contact-info__header">
-                  <h1 className="modal__title--contact-info">Let Me Build Something Amazing for You</h1>
-                  <h2 className="modal__sub-title--contact-info">Custom <span className="blue">Web Solutions</span> tailored to your needs</h2>
+                {/* --- TOP PART --- */}
+                <div>
+                  <div className="contact-info__header">
+                    <h1 className="modal__title--contact-info">Let Me Build Something Amazing for You</h1>
+                    <h2 className="modal__sub-title--contact-info">Custom <span className="blue">Web Solutions</span> tailored to your needs</h2>
+                  </div>
+                  <div className="contact-info__body">
+                    <p className="modal__para">
+                      Every business is unique. I create <span className="blue">custom web applications</span> from scratch that perfectly match your vision and brand.
+                    </p>
+                    <p className="modal__para">
+                      No templates, no limitations – just a beautifully crafted solution built for you.
+                    </p>
+                    {/* --- NEW PARAGRAPH --- */}
+                    <p className="modal__para">
+                      From stunning UI/UX designs to seamless and responsive development, I provide the expertise to bring your ideas to life.
+                    </p>
+                  </div>
                 </div>
-                <div className="contact-info__body">
-                  <p className="modal__para">
-                    Every business is unique. I create <span className="blue">custom web applications</span> from scratch that perfectly match your vision and brand.
-                  </p>
-                  <p className="modal__para">
-                    No templates, no limitations – just a beautifully crafted solution built for you.
-                  </p>
+
+
+                {/* --- BOTTOM PART (SERVICES) --- */}
+                <div className="contact-info__footer">
+                  <h3 className="services-title">My Services</h3>
+                  <div className="modal__services">
+                    <div className="tech-icon code-icon">
+                      <FontAwesomeIcon icon={faCode} />
+                      <span className="tech-name">Web Dev</span>
+                    </div>
+                    <div className="tech-icon design-icon">
+                      <FontAwesomeIcon icon={faPalette} />
+                      <span className="tech-name">UI/UX</span>
+                    </div>
+                    <div className="tech-icon responsive-icon">
+                      <FontAwesomeIcon icon={faMobileAlt} />
+                      <span className="tech-name">Responsive</span>
+                    </div>
+                  </div>
                 </div>
+
+
               </div>
             </div>
           )}
         </div>
+
 
         {/* --- RIGHT SIDE --- */}
         <div
@@ -218,7 +256,9 @@ const Modal = ({ isOpen, onClose, modalType }) => {
   );
 };
 
+
 export default Modal;
+
 
 
 
